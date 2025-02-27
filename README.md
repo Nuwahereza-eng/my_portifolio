@@ -20,17 +20,17 @@ I’m Nuwahereza Peter, a passionate software engineering student specializing i
 ### Flutter Chat App
 A real-time chat application built with Flutter and Firebase.
 - **Tech:** Flutter, Firebase, Git
-- [View on GitHub](https://github.com/yourusername/chat-app)
+- [View on GitHub](https://github.com/Nuwahereza-eng/chat-app)
 
 ### E-Commerce UI
 A sleek mobile storefront designed with Flutter and Supabase backend.
 - **Tech:** Flutter, Supabase
-- [View on GitHub](https://github.com/yourusername/ecommerce-ui)
+- [View on GitHub](https://github.com/Nuwahereza-eng/ecommerce-ui)
 
 ### Portfolio Website
 This very site! Built with HTML, CSS, and JavaScript.
 - **Tech:** HTML, CSS, JavaScript
-- [View on GitHub](https://github.com/yourusername/portfolio)
+- [View on GitHub](https://github.com/Nuwahereza-eng/portfolio)
 
 ## Skills & Tools
 
@@ -47,9 +47,9 @@ This very site! Built with HTML, CSS, and JavaScript.
 ## Contact
 
 Feel free to reach out for collaborations or just to say hi!
-- [GitHub](https://github.com/yourusername)
-- [LinkedIn](https://linkedin.com/in/yourusername)
-- [Email](mailto:your.email@example.com)
+- [GitHub](https://github.com/Nuwahereza-eng)
+- [LinkedIn](https://linkedin.com/in/petercodes34)
+- [Email](mailto:your.nuwaherezapeter34@gmail.com)
 
 ## Setup
 
@@ -57,7 +57,7 @@ To run this project locally, follow these steps:
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/yourusername/portfolio.git
+    git clone https://github.com/Nuwahereza-eng/portfolio.git
     ```
 2. Navigate to the project directory:
     ```sh

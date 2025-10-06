@@ -266,10 +266,113 @@
                 </div>
             </div>
             <div class="projects-cta">
-                <a href="https://github.com/Nuwahereza-eng" target="_blank" class="btn btn-outline">
+                <button id="view-more-projects" class="btn btn-outline">
+                    <i class="fas fa-plus"></i>
+                    <span class="btn-text">View More Projects</span>
+                </button>
+                <a href="https://github.com/Nuwahereza-eng" target="_blank" class="btn btn-primary" style="margin-left: 1rem;">
                     <i class="fab fa-github"></i>
-                    View All Projects
+                    GitHub Profile
                 </a>
+            </div>
+            
+            <!-- Additional Projects (Hidden by default) -->
+            <div id="more-projects" class="more-projects-container" style="display: none;">
+                <div class="section-divider">
+                    <h3 class="more-projects-title">Additional Projects</h3>
+                </div>
+                <div class="project-grid">
+                    <div class="project-card" data-aos="fade-up">
+                        <div class="project-image">
+                            <img src="./assets/images/dms.png" alt="Dairy Management System" class="project-img">
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="https://github.com/Nuwahereza-eng/dairflow" target="_blank" class="project-link">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                    <a href="#" class="project-link">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Dairy Management System</h3>
+                            <p class="project-description">
+                                A comprehensive management system for dairy operations including inventory tracking, milk production records, and financial management.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Next Js</span>
+                                <span class="tech-tag">Firebase</span>
+                                <span class="tech-tag">TypeScript</span>
+                                <span class="tech-tag">Bootstrap</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="project-image">
+                            <img src="./assets/images/evander.png" alt="Evander Schools Website" class="project-img">
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="https://github.com/Nuwahereza-eng/school_website" target="_blank" class="project-link">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                    <a href="#" class="project-link">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Evander Schools Website</h3>
+                            <p class="project-description">
+                                Modern school website featuring student portals, online admissions, course management, and interactive learning resources.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">Node.js</span>
+                                <span class="tech-tag">MongoDB</span>
+                                <span class="tech-tag">CSS3</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1555421689-491a97ff2040?w=400&h=200&fit=crop" alt="Task Management App" class="project-img">
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="https://github.com/Nuwahereza-eng/task-manager" target="_blank" class="project-link">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                    <a href="#" class="project-link">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Task Management App</h3>
+                            <p class="project-description">
+                                A productivity application with team collaboration features, deadline tracking, and progress monitoring capabilities.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Flutter</span>
+                                <span class="tech-tag">Firebase</span>
+                                <span class="tech-tag">Dart</span>
+                                <span class="tech-tag">Cloud Functions</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="projects-cta" style="margin-top: 2rem;">
+                    <button id="hide-projects" class="btn btn-outline">
+                        <i class="fas fa-minus"></i>
+                        Show Less
+                    </button>
+                </div>
             </div>
         </div>
     </section>

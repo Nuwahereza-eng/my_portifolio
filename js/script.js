@@ -460,5 +460,69 @@ function preloadImages() {
     });
 }
 
+// More Projects Toggle Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const viewMoreBtn = document.getElementById('view-more-projects');
+    const hideProjectsBtn = document.getElementById('hide-projects');
+    const moreProjectsContainer = document.getElementById('more-projects');
+    
+    if (viewMoreBtn && moreProjectsContainer) {
+        viewMoreBtn.addEventListener('click', function() {
+            // Show the additional projects
+            moreProjectsContainer.style.display = 'block';
+            
+            // Smooth animation
+            setTimeout(() => {
+                moreProjectsContainer.classList.add('show');
+            }, 50);
+            
+            // Update button text
+            const btnText = this.querySelector('.btn-text');
+            const btnIcon = this.querySelector('i');
+            btnText.textContent = 'Loading Projects...';
+            btnIcon.className = 'fas fa-spinner fa-spin';
+            
+            // Simulate loading and scroll to new content
+            setTimeout(() => {
+                btnText.textContent = 'View More Projects';
+                btnIcon.className = 'fas fa-check';
+                
+                // Scroll to the new projects section
+                moreProjectsContainer.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                
+                // Hide the view more button
+                this.style.display = 'none';
+            }, 1000);
+        });
+    }
+    
+    if (hideProjectsBtn && moreProjectsContainer) {
+        hideProjectsBtn.addEventListener('click', function() {
+            // Hide the additional projects with animation
+            moreProjectsContainer.classList.remove('show');
+            
+            setTimeout(() => {
+                moreProjectsContainer.style.display = 'none';
+                
+                // Show the view more button again
+                viewMoreBtn.style.display = 'inline-flex';
+                const btnText = viewMoreBtn.querySelector('.btn-text');
+                const btnIcon = viewMoreBtn.querySelector('i');
+                btnText.textContent = 'View More Projects';
+                btnIcon.className = 'fas fa-plus';
+                
+                // Scroll back to the main projects section
+                document.getElementById('projects').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+            }, 300);
+        });
+    }
+});
+
 // Initialize preloading
 preloadImages();

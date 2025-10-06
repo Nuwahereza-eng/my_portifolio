@@ -765,6 +765,47 @@ header.navbar {
     text-align: center;
 }
 
+/* More Projects Section */
+.more-projects-container {
+    margin-top: 3rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.more-projects-container.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.section-divider {
+    text-align: center;
+    margin: 3rem 0 2rem;
+    position: relative;
+}
+
+.section-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), transparent);
+    z-index: 1;
+}
+
+.more-projects-title {
+    font-size: 1.8rem;
+    color: #667eea;
+    background: #0f172a;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 2;
+    margin: 0;
+    font-weight: 600;
+}
+
 /* Skills Section */
 .skills {
     padding: 100px 0;

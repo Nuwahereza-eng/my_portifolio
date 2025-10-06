@@ -211,16 +211,83 @@ function createParticles() {
     }
 }
 
-// Contact form handling
-const contactForm = document.querySelector('.form');
-if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
+// Initialize EmailJS using config
+(function() {
+    // Wait for config to be loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        if (window.PORTFOLIO_CONFIG && window.PORTFOLIO_CONFIG.emailjs.publicKey !== 'YOUR_EMAILJS_PUBLIC_KEY') {
+            emailjs.init(window.PORTFOLIO_CONFIG.emailjs.publicKey);
+            console.log('EmailJS initialized with config');
+        } else {
+            console.warn('EmailJS not configured. Please update config/config.js with your EmailJS credentials.');
+        }
+    });
+})();
+
+// Contact form handling with EmailJS
+document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const btnText = document.querySelector('.btn-text');
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Change button state to loading
+            submitBtn.disabled = true;
+            btnText.textContent = 'Sending...';
+            submitBtn.querySelector('i').className = 'fas fa-spinner fa-spin';
+            
+            // Get configuration
+            const config = window.PORTFOLIO_CONFIG;
+            if (!config || !config.emailjs.serviceId || config.emailjs.serviceId === 'YOUR_EMAILJS_SERVICE_ID') {
+                showNotification('Email service not configured. Please contact me directly at ' + (config?.contact?.email || 'nuwaherezapeter34@gmail.com'), 'error');
+                return;
+            }
+            
+            // Get form data
+            const formData = new FormData(this);
+            const templateParams = {
+                from_name: formData.get('from_name'),      // Visitor's name
+                from_email: formData.get('from_email'),    // Visitor's email address
+                subject: formData.get('subject'),          // Message subject
+                message: formData.get('message'),          // The actual message content
+                to_name: config.contact.name,             // Your name (recipient)
+                to_email: config.contact.email            // Your email (where you'll receive the message)
+            };
+            
+            // Send email TO your inbox using EmailJS
+            // This sends the visitor's contact form data directly to your email
+            emailjs.send(config.emailjs.serviceId, config.emailjs.templateId, templateParams)
+                .then(function(response) {
+                    console.log('Email sent to your inbox successfully!', response.status, response.text);
+                    showNotification('Thank you! Your message has been sent. I\'ll get back to you soon!', 'success');
+                    contactForm.reset();
+                }, function(error) {
+                    console.log('Failed to send email:', error);
+                    showNotification('Sorry, there was an error sending your message. Please try again or contact me directly at ' + config.contact.email, 'error');
+                })
+                .finally(function() {
+                    // Reset button state
+                    submitBtn.disabled = false;
+                    btnText.textContent = 'Send Message';
+                    submitBtn.querySelector('i').className = 'fas fa-paper-plane';
+                });
+        });
+    }
+});
+
+// Contact form handling (fallback for non-EmailJS setup)
+const contactFormFallback = document.querySelector('.form:not(#contact-form)');
+if (contactFormFallback) {
+    contactFormFallback.addEventListener('submit', function(e) {
         e.preventDefault();
         
         // Get form data
         const formData = new FormData(this);
-        const name = formData.get('name');
-        const email = formData.get('email');
+        const name = formData.get('from_name') || formData.get('name');
+        const email = formData.get('from_email') || formData.get('email');
         const subject = formData.get('subject');
         const message = formData.get('message');
         
@@ -230,43 +297,13 @@ if (contactForm) {
             return;
         }
         
-        // Simulate form submission
-        showNotification('Message sent successfully!', 'success');
+        // Create mailto link as fallback
+        const mailtoLink = `mailto:nuwaherezapeter34@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`From: ${name} (${email})\n\n${message}`)}`;
+        window.location.href = mailtoLink;
+        
+        showNotification('Opening your email client...', 'success');
         this.reset();
     });
-}
-
-// Download resume function
-function downloadResume() {
-    // Create a simple resume download
-    const link = document.createElement('a');
-    link.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(`
-NUWAHEREZA PETER
-Mobile App Developer | Frontend Enthusiast | Software Engineering Student
-
-CONTACT:
-Email: nuwaherezapeter34@gmail.com
-LinkedIn: linkedin.com/in/petercodes34
-GitHub: github.com/Nuwahereza-eng
-
-SKILLS:
-- Mobile Development: Flutter, Dart
-- Frontend: HTML5, CSS3, JavaScript
-- Backend: Firebase, Supabase
-- Tools: Git, GitHub, Docker
-
-PROJECTS:
-1. Flutter Weather App - Real-time weather application
-2. E-Commerce Mobile App - Modern UI/UX storefront
-3. Portfolio Website - Responsive personal website
-
-EXPERIENCE:
-- Software Engineering Student (2022 - Present)
-- Flutter Developer - Freelance (2023 - Present)
-- Web Developer - Personal Projects (2022 - Present)
-    `);
-    link.download = 'Nuwahereza_Peter_Resume.txt';
-    link.click();
 }
 
 // Notification system

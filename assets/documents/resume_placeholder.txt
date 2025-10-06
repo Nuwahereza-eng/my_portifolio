@@ -1,0 +1,27 @@
+# Resume Placeholder
+
+This is a placeholder file. Please replace this with your actual PDF resume.
+
+To add your PDF resume:
+
+1. Save your resume as "resume.pdf"
+2. Place it in the same directory as your index.html file
+3. The download link in your portfolio will automatically work
+
+Your resume file should be named exactly: **resume.pdf**
+
+The current download button in your portfolio links to this file:
+```html
+<a href="resume.pdf" download="Nuwahereza_Peter_Resume.pdf" class="btn btn-primary">
+```
+
+Make sure your PDF resume includes:
+- Contact information
+- Professional summary
+- Education
+- Skills
+- Experience
+- Projects
+- Any relevant certifications
+
+For best results, keep your resume to 1-2 pages and use a clean, professional format.

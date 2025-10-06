@@ -31,7 +31,7 @@
                         </div>
                     </div>
                     <div class="about-buttons">
-                        <a href="#" class="btn btn-primary" onclick="downloadResume()">
+                        <a href="assets/documents/resume.pdf" download="Nuwahereza_Peter_Resume.pdf" class="btn btn-primary">
                             <i class="fas fa-download"></i>
                             Download Resume
                         </a>
@@ -98,13 +98,17 @@
     <title>Nuwahereza Peter - Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
+                <div class="nav-profile">
+                    <img src="assets/images/peterImage.jpg" alt="Nuwahereza Peter" class="nav-profile-img">
+                </div>
                 <span>Nuwahereza Peter</span>
             </div>
             <div class="nav-menu">
@@ -128,7 +132,7 @@
         <div class="hero-particles"></div>
         <div class="hero-content">
             <div class="hero-image">
-                <img src="peterImage.jpg" alt="Nuwahereza Peter - Portfolio Photo">
+                <img src="assets/images/peterImage.jpg" alt="Nuwahereza Peter - Portfolio Photo">
                 <div class="image-border"></div>
             </div>
             <h1 class="hero-title">
@@ -180,6 +184,7 @@
             <div class="project-grid">
                 <div class="project-card" data-aos="fade-up">
                     <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=400&h=200&fit=crop" alt="Weather App" class="project-img">
                         <div class="project-overlay">
                             <div class="project-links">
                                 <a href="https://github.com/Nuwahereza-eng/weatherApp" target="_blank" class="project-link">
@@ -207,6 +212,7 @@
                 
                 <div class="project-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=200&fit=crop" alt="E-Commerce App" class="project-img">
                         <div class="project-overlay">
                             <div class="project-links">
                                 <a href="https://github.com/Nuwahereza-eng/e_commerce" target="_blank" class="project-link">
@@ -234,6 +240,7 @@
                 
                 <div class="project-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=200&fit=crop" alt="Portfolio Website" class="project-img">
                         <div class="project-overlay">
                             <div class="project-links">
                                 <a href="https://github.com/Nuwahereza-eng/my_portifolio" target="_blank" class="project-link">
@@ -416,12 +423,12 @@
                     </div>
                 </div>
                 <div class="contact-form">
-                    <form class="form">
+                    <form class="form" id="contact-form">
                         <div class="form-group">
-                            <input type="text" id="name" name="name" placeholder="Your Name" required>
+                            <input type="text" id="name" name="from_name" placeholder="Your Name" required>
                         </div>
                         <div class="form-group">
-                            <input type="email" id="email" name="email" placeholder="Your Email" required>
+                            <input type="email" id="email" name="from_email" placeholder="Your Email" required>
                         </div>
                         <div class="form-group">
                             <input type="text" id="subject" name="subject" placeholder="Subject" required>
@@ -429,9 +436,9 @@
                         <div class="form-group">
                             <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary" id="submit-btn">
                             <i class="fas fa-paper-plane"></i>
-                            Send Message
+                            <span class="btn-text">Send Message</span>
                         </button>
                     </form>
                 </div>
@@ -461,6 +468,7 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="config/config.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>

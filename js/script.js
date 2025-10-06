@@ -48,26 +48,24 @@ if (navToggle && navMenu) {
     });
 }
 
-// Navbar scroll effect
+// Navbar scroll effect with smooth color transitions
 let lastScrollTop = 0;
 const navbar = document.querySelector('.navbar');
 
 window.addEventListener('scroll', () => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     
-    if (scrollTop > lastScrollTop) {
-        // Scrolling down
-        navbar.style.transform = 'translateY(-100%)';
+    // Navbar stays visible - no hiding on scroll
+    // Add smooth color transitions based on scroll position
+    if (scrollTop > 100) {
+        navbar.classList.add('scrolled');
+        navbar.classList.remove('transparent');
+    } else if (scrollTop > 20) {
+        navbar.classList.remove('scrolled');
+        navbar.classList.remove('transparent');
     } else {
-        // Scrolling up
-        navbar.style.transform = 'translateY(0)';
-    }
-    
-    // Add background when scrolled
-    if (scrollTop > 50) {
-        navbar.style.background = 'rgba(10, 14, 39, 0.98)';
-    } else {
-        navbar.style.background = 'rgba(10, 14, 39, 0.95)';
+        navbar.classList.remove('scrolled');
+        navbar.classList.add('transparent');
     }
     
     lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;

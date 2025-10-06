@@ -53,32 +53,52 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 4rem;
 }
 
-/* Navigation */
+/* Navigation - Strong deployment-safe rules */
 .navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
+    position: fixed !important;
+    top: 0 !important;
+    width: 100% !important;
     background: rgba(10, 14, 39, 0.7);
     -webkit-backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    z-index: 1000;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    transform: translateY(0) !important; /* Force navbar to stay visible */
+    z-index: 1000 !important;
+    transition: background 0.5s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
 }
 
 .navbar.scrolled {
-    background: rgba(10, 14, 39, 0.98);
+    background: rgba(10, 14, 39, 0.98) !important;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     border-bottom: 1px solid rgba(102, 126, 234, 0.3);
-    transform: translateY(0) !important; /* Force navbar to stay visible */
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
 }
 
 .navbar.transparent {
-    background: rgba(10, 14, 39, 0.3);
+    background: rgba(10, 14, 39, 0.3) !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    transform: translateY(0) !important; /* Force navbar to stay visible */
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+}
+
+/* Override any potential conflicting styles */
+nav.navbar,
+.navbar,
+header.navbar {
+    transform: none !important;
+    -webkit-transform: none !important;
+    -moz-transform: none !important;
+    -ms-transform: none !important;
+    -o-transform: none !important;
 }
 
 .nav-container {

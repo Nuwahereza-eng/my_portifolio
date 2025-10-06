@@ -48,34 +48,71 @@ if (navToggle && navMenu) {
     });
 }
 
-// Navbar scroll effect with smooth color transitions
+// Navbar scroll effect with deployment-safe visibility
 let lastScrollTop = 0;
 const navbar = document.querySelector('.navbar');
+
+// Force navbar visibility on page load
+if (navbar) {
+    navbar.style.setProperty('transform', 'translateY(0)', 'important');
+    navbar.style.setProperty('display', 'block', 'important');
+    navbar.style.setProperty('visibility', 'visible', 'important');
+    navbar.style.setProperty('opacity', '1', 'important');
+    navbar.style.setProperty('position', 'fixed', 'important');
+    navbar.style.setProperty('top', '0', 'important');
+    navbar.style.setProperty('z-index', '1000', 'important');
+}
 
 window.addEventListener('scroll', () => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     
-    // Ensure navbar is always visible (safety check)
+    // Multiple safety checks for deployed websites
     if (navbar) {
-        navbar.style.transform = 'translateY(0)';
-        navbar.style.display = 'block';
-        navbar.style.visibility = 'visible';
-    }
-    
-    // Add smooth color transitions based on scroll position
-    if (scrollTop > 100) {
-        navbar.classList.add('scrolled');
-        navbar.classList.remove('transparent');
-    } else if (scrollTop > 20) {
-        navbar.classList.remove('scrolled');
-        navbar.classList.remove('transparent');
-    } else {
-        navbar.classList.remove('scrolled');
-        navbar.classList.add('transparent');
+        // Force navbar to stay visible with highest priority
+        navbar.style.setProperty('transform', 'translateY(0)', 'important');
+        navbar.style.setProperty('display', 'block', 'important');
+        navbar.style.setProperty('visibility', 'visible', 'important');
+        navbar.style.setProperty('opacity', '1', 'important');
+        navbar.style.setProperty('position', 'fixed', 'important');
+        navbar.style.setProperty('top', '0', 'important');
+        
+        // Remove any potentially conflicting classes or attributes
+        navbar.classList.remove('hidden', 'invisible', 'opacity-0');
+        
+        // Add smooth color transitions based on scroll position
+        if (scrollTop > 100) {
+            navbar.classList.add('scrolled');
+            navbar.classList.remove('transparent');
+        } else if (scrollTop > 20) {
+            navbar.classList.remove('scrolled');
+            navbar.classList.remove('transparent');
+        } else {
+            navbar.classList.remove('scrolled');
+            navbar.classList.add('transparent');
+        }
     }
     
     lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
 });
+
+// Additional safety check on DOM ready
+document.addEventListener('DOMContentLoaded', function() {
+    const navbar = document.querySelector('.navbar');
+    if (navbar) {
+        navbar.style.setProperty('transform', 'translateY(0)', 'important');
+        navbar.style.setProperty('display', 'block', 'important');
+        navbar.style.setProperty('visibility', 'visible', 'important');
+        navbar.style.setProperty('opacity', '1', 'important');
+    }
+});
+
+// Safety check every 5 seconds for deployed sites
+setInterval(() => {
+    const navbar = document.querySelector('.navbar');
+    if (navbar && window.getComputedStyle(navbar).transform !== 'none') {
+        navbar.style.setProperty('transform', 'translateY(0)', 'important');
+    }
+}, 5000);
 
 // Typing animation for hero section
 const typingTexts = [

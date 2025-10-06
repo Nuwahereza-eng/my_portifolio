@@ -158,7 +158,29 @@ function typeText() {
 }
 
 // Start typing animation when page loads
-document.addEventListener('DOMContentLoaded', typeText);
+document.addEventListener('DOMContentLoaded', function() {
+    // Small delay to ensure everything is loaded
+    setTimeout(typeText, 500);
+});
+
+// Initialize scroll animations after page is fully loaded
+window.addEventListener('load', function() {
+    // Show the page with fade-in effect
+    document.body.classList.add('loaded');
+    
+    // Additional delay for smooth appearance
+    setTimeout(initScrollAnimations, 1000);
+});
+
+function initScrollAnimations() {
+    // Observe all sections for scroll animations
+    document.querySelectorAll('section, .timeline-item, .project-card, .skills-category, .about-stats').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+    });
+}
 
 // Scroll animations
 const observerOptions = {
@@ -184,14 +206,6 @@ const observer = new IntersectionObserver((entries) => {
         }
     });
 }, observerOptions);
-
-// Observe all sections for scroll animations
-document.querySelectorAll('section, .timeline-item, .project-card, .skills-category, .about-stats').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(el);
-});
 
 // Animate skill bars
 function animateSkillBars(skillsSection) {

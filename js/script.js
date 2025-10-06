@@ -12,6 +12,23 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+// Scroll arrow functionality
+const scrollArrow = document.querySelector('.scroll-indicator');
+if (scrollArrow) {
+    scrollArrow.addEventListener('click', () => {
+        const aboutSection = document.querySelector('#about');
+        if (aboutSection) {
+            aboutSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+    
+    // Add cursor pointer style
+    scrollArrow.style.cursor = 'pointer';
+}
+
 // Mobile navigation toggle
 const navToggle = document.querySelector('.nav-toggle');
 const navMenu = document.querySelector('.nav-menu');

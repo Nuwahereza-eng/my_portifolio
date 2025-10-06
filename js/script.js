@@ -55,7 +55,13 @@ const navbar = document.querySelector('.navbar');
 window.addEventListener('scroll', () => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     
-    // Navbar stays visible - no hiding on scroll
+    // Ensure navbar is always visible (safety check)
+    if (navbar) {
+        navbar.style.transform = 'translateY(0)';
+        navbar.style.display = 'block';
+        navbar.style.visibility = 'visible';
+    }
+    
     // Add smooth color transitions based on scroll position
     if (scrollTop > 100) {
         navbar.classList.add('scrolled');

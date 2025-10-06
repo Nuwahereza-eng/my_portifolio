@@ -65,17 +65,20 @@ h1, h2, h3, h4, h5, h6 {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     z-index: 1000;
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(0) !important; /* Force navbar to stay visible */
 }
 
 .navbar.scrolled {
     background: rgba(10, 14, 39, 0.98);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     border-bottom: 1px solid rgba(102, 126, 234, 0.3);
+    transform: translateY(0) !important; /* Force navbar to stay visible */
 }
 
 .navbar.transparent {
     background: rgba(10, 14, 39, 0.3);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transform: translateY(0) !important; /* Force navbar to stay visible */
 }
 
 .nav-container {

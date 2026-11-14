@@ -5,16 +5,18 @@ Live at <https://nuwahereza-eng.github.io/my_portifolio/>.
 
 ## Stack
 
-Plain HTML, CSS and JavaScript. No build step and no frameworks.
+Plain HTML, CSS and JavaScript. No build step, no frameworks, no external requests at load time.
 
-- `index.html`: all page content
-- `css/styles.css`: styles, with light and dark themes as CSS variables
-- `js/script.js`: theme toggle, mobile menu, scroll reveal, contact form
-- `config/config.js`: EmailJS keys and contact details for the form
-- `assets/images/`: portrait (`peter-*.webp/jpg`) and social preview (`og-image.jpg`)
+- `index.html`: the page
+- `cv.html`: one-page CV that prints to A4 ("Save as PDF")
+- `css/styles.css`: styles. Dark theme by default, light theme via `[data-theme="light"]`
+- `js/script.js`: theme toggle, mobile menu, active nav link, scroll fade-in, hero network animation
+- `assets/fonts/`: self-hosted Inter and JetBrains Mono (latin subset, SIL Open Font License, see `OFL-*.txt`)
+- `assets/images/`: portrait (`peter-*.webp/jpg`), social preview (`og-image.jpg`, 1200×630), icons
+- `favicon.svg`
 
-EmailJS loads only when a visitor starts filling in the contact form. If EmailJS is not configured,
-the form opens the visitor's email app instead.
+The hero animation starts after the page has loaded, runs at about 30 fps, pauses when off screen or in a
+background tab, and does not run when the visitor's system asks for reduced motion.
 
 ## Preview locally
 
@@ -29,6 +31,6 @@ python3 -m http.server 8000
 
 ## Editing content
 
-- Projects: the `<article class="card project">` blocks in the Projects section of `index.html`.
-- Experience: the `.timeline` lists in the Experience section.
-- Social preview: `og-image.jpg` is 1200×630. Update the `og:` meta tags if you rename it.
+- Projects: `<article class="project">` blocks. Add `project--featured` to make a card full width with a result panel.
+- Experience: the `.timeline` lists. Add `is-current` to the current role.
+- Keep `cv.html` in step with the page when roles or projects change.

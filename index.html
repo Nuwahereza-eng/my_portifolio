@@ -1,48 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Nuwahereza Peter | ML/AI Engineer (Python), Kampala</title>
+    <title>Nuwahereza Peter | ML/AI Engineer, Python</title>
     <meta name="description" content="Nuwahereza Peter is an ML/AI engineer in Kampala, Uganda, working in Python on machine learning, data, and speech and language AI for Luganda and other Ugandan languages.">
     <meta name="author" content="Nuwahereza Peter">
     <link rel="canonical" href="https://nuwahereza-eng.github.io/my_portifolio/">
-    <meta name="theme-color" content="#f7f8fa" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)">
+    <meta name="color-scheme" content="dark light">
+    <meta name="theme-color" content="#0b0d12">
 
     <!-- Social preview -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Nuwahereza Peter">
-    <meta property="og:title" content="Nuwahereza Peter | ML/AI Engineer (Python)">
+    <meta property="og:title" content="Nuwahereza Peter | ML/AI Engineer, Python">
     <meta property="og:description" content="Machine learning, data and speech AI for Uganda and East Africa. Projects in churn prediction, Luganda speech recognition and Luganda AI assistants.">
     <meta property="og:url" content="https://nuwahereza-eng.github.io/my_portifolio/">
     <meta property="og:image" content="https://nuwahereza-eng.github.io/my_portifolio/assets/images/og-image.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Nuwahereza Peter, ML/AI Engineer, Kampala, Uganda">
+    <meta property="og:image:alt" content="Nuwahereza Peter, ML/AI Engineer, Python. Kampala, Uganda.">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Nuwahereza Peter | ML/AI Engineer (Python)">
+    <meta name="twitter:title" content="Nuwahereza Peter | ML/AI Engineer, Python">
     <meta name="twitter:description" content="Machine learning, data and speech AI for Uganda and East Africa.">
     <meta name="twitter:image" content="https://nuwahereza-eng.github.io/my_portifolio/assets/images/og-image.jpg">
 
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232f5bd3'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-size='28' font-weight='700' fill='white' text-anchor='middle'%3ENP%3C/text%3E%3C/svg%3E">
-    <link rel="preload" as="image" href="assets/images/peter-480.webp" type="image/webp">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="assets/images/favicon-32.png" sizes="32x32" type="image/png">
+    <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
 
-    <!-- Set theme before paint to avoid a flash -->
+    <!-- Dark by default; switch to light before paint if the visitor chose it -->
     <script>
         (function () {
-            document.documentElement.classList.add('js');
+            var d = document.documentElement;
+            d.classList.add('js');
             try {
-                var t = localStorage.getItem('theme');
-                if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+                if (localStorage.getItem('theme') === 'light') d.setAttribute('data-theme', 'light');
             } catch (e) {}
         })();
     </script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css?v=2026-11-14">
+    <!-- Self-hosted fonts, preloaded so the first layout already uses them -->
+    <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="css/styles.css?v=2026-11-14c">
 
     <script type="application/ld+json">
     {
@@ -70,19 +71,20 @@
         <symbol id="i-mail" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M3 6.5A1.5 1.5 0 0 1 4.5 5h15A1.5 1.5 0 0 1 21 6.5v11a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5v-11Zm0 .5 9 6 9-6"/></symbol>
         <symbol id="i-whatsapp" viewBox="0 0 24 24"><path fill="currentColor" d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35ZM12.04 21.8h-.01a9.9 9.9 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26C2.15 6.45 6.6 2 12.05 2a9.83 9.83 0 0 1 9.9 9.9c0 5.46-4.45 9.9-9.9 9.9Zm8.42-18.32A11.82 11.82 0 0 0 12.04 0C5.48 0 .13 5.34.13 11.9c0 2.1.55 4.14 1.59 5.95L.03 24l6.3-1.65a11.88 11.88 0 0 0 5.71 1.45h.01c6.56 0 11.9-5.34 11.9-11.9 0-3.18-1.24-6.17-3.49-8.42Z"/></symbol>
         <symbol id="i-external" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M14 4h6v6M20 4l-9 9M18 14v4.5A1.5 1.5 0 0 1 16.5 20h-11A1.5 1.5 0 0 1 4 18.5v-11A1.5 1.5 0 0 1 5.5 6H10"/></symbol>
+        <symbol id="i-file" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Zm0 0v5h5M9 13h6M9 17h6"/></symbol>
+        <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
         <symbol id="i-sun" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g></symbol>
         <symbol id="i-moon" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11Z"/></symbol>
         <symbol id="i-menu" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></symbol>
-        <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></g></symbol>
-        <symbol id="i-send" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M21 3 10 14M21 3l-7 18-4-7-7-4 18-7Z"/></symbol>
+        <symbol id="i-close" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></symbol>
     </svg>
 
     <a class="skip-link" href="#main">Skip to content</a>
 
-    <header class="site-header" id="top">
+    <header class="site-header">
         <nav class="nav container" aria-label="Main">
             <a href="#top" class="brand" aria-label="Nuwahereza Peter, back to top">
-                <span class="brand-mark" aria-hidden="true">NP</span>
+                <img src="favicon.svg" width="28" height="28" alt="" class="brand-mark">
                 <span class="brand-name">Nuwahereza Peter</span>
             </a>
             <div class="nav-links" id="nav-links">
@@ -93,12 +95,13 @@
                 <a href="#contact">Contact</a>
             </div>
             <div class="nav-actions">
-                <button class="icon-btn theme-toggle" type="button" aria-label="Switch to dark mode">
-                    <svg class="icon icon-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+                <button class="icon-btn theme-toggle" type="button" aria-label="Switch to light mode">
                     <svg class="icon icon-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+                    <svg class="icon icon-moon" aria-hidden="true"><use href="#i-moon"/></svg>
                 </button>
                 <button class="icon-btn nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
-                    <svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg>
+                    <svg class="icon icon-open" aria-hidden="true"><use href="#i-menu"/></svg>
+                    <svg class="icon icon-close" aria-hidden="true"><use href="#i-close"/></svg>
                 </button>
             </div>
         </nav>
@@ -106,422 +109,418 @@
 
     <main id="main">
         <!-- Hero -->
-        <section class="hero container" aria-labelledby="hero-title">
-            <div class="hero-text">
-                <p class="eyebrow">ML / AI Engineer · Python · Kampala, Uganda</p>
-                <h1 id="hero-title">I build machine learning and speech tools for Uganda and East Africa.</h1>
-                <p class="lead">
-                    I'm Nuwahereza Peter. I work mainly in Python: data analysis, model training and evaluation,
-                    and AI tools that understand Luganda and other Ugandan languages.
-                </p>
+        <section class="hero" id="top" aria-labelledby="hero-name">
+            <canvas class="hero-net" aria-hidden="true"></canvas>
+            <div class="container hero-inner">
+                <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Kampala, Uganda</p>
+                <h1 id="hero-name">Nuwahereza Peter</h1>
+                <p class="hero-role">ML/AI Engineer, Python</p>
+                <p class="hero-line">I build machine learning and speech tools for Uganda and East Africa.</p>
                 <div class="hero-cta">
-                    <a href="#projects" class="btn btn-primary">See my projects</a>
+                    <a href="#projects" class="btn btn-primary">
+                        Projects <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+                    </a>
+                    <a href="cv.html" class="btn btn-ghost">
+                        <svg class="icon" aria-hidden="true"><use href="#i-file"/></svg> CV
+                    </a>
                     <a href="https://github.com/Nuwahereza-eng" class="btn btn-ghost" target="_blank" rel="noopener">
                         <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg> GitHub
                     </a>
-                    <a href="#contact" class="btn btn-ghost">Contact me</a>
                 </div>
-            </div>
-            <div class="hero-photo">
-                <picture>
-                    <source srcset="assets/images/peter-480.webp 480w, assets/images/peter-240.webp 240w" sizes="(max-width: 720px) 200px, 320px" type="image/webp">
-                    <img src="assets/images/peter-480.jpg" srcset="assets/images/peter-480.jpg 480w, assets/images/peter-240.jpg 240w" sizes="(max-width: 720px) 200px, 320px"
-                         width="480" height="480" alt="Portrait of Nuwahereza Peter wearing glasses and a navy blue suit" fetchpriority="high">
-                </picture>
             </div>
         </section>
 
         <!-- About -->
-        <section id="about" class="section container" aria-labelledby="about-title">
-            <div class="section-head reveal">
-                <p class="kicker">About</p>
-                <h2 id="about-title">Who I am</h2>
-            </div>
-            <div class="about-grid">
-                <div class="about-text reveal">
-                    <p>
-                        I'm a software engineer from Kampala. I finished a BSc in Software Engineering at Uganda Technology
-                        and Management University (UTAMU) in 2026.
-                    </p>
-                    <p>
-                        I work mostly in Python. I clean and explore data, train and test models, and put them behind
-                        simple APIs and apps that people can use.
-                    </p>
-                    <p>
-                        Much of my recent work is in Luganda, using open models such as Sunbird AI's Whisper speech model
-                        and Google's Gemma.
-                    </p>
-                    <p>
-                        I now work at UTAMU as Assistant ICT Officer. During my degree I was Technical Lead of GDG UTAMU
-                        and Vice President of the UTAMU Innovation Club.
-                    </p>
+        <section id="about" class="section" aria-labelledby="about-title">
+            <div class="container">
+                <header class="section-head reveal">
+                    <p class="label">About</p>
+                    <h2 id="about-title">Who I am</h2>
+                </header>
+                <div class="about-grid">
+                    <div class="about-text reveal">
+                        <p>
+                            I'm a software engineer from Kampala. I finished a BSc in Software Engineering at Uganda Technology
+                            and Management University (UTAMU) in 2026.
+                        </p>
+                        <p>
+                            I work mostly in Python. I clean and explore data, train and test models, and put them behind
+                            simple APIs and apps that people can use.
+                        </p>
+                        <p>
+                            Much of my recent work is in Luganda, using open models such as Sunbird AI's Whisper speech model
+                            and Google's Gemma.
+                        </p>
+                        <p>
+                            I now work at UTAMU as Assistant ICT Officer. During my degree I was Technical Lead of GDG UTAMU
+                            and Vice President of the UTAMU Innovation Club.
+                        </p>
+                    </div>
+                    <aside class="profile reveal" aria-label="Quick facts">
+                        <picture>
+                            <source srcset="assets/images/peter-240.webp 240w, assets/images/peter-480.webp 480w" sizes="120px" type="image/webp">
+                            <img src="assets/images/peter-240.jpg" srcset="assets/images/peter-240.jpg 240w, assets/images/peter-480.jpg 480w" sizes="120px"
+                                 width="120" height="120" loading="lazy" decoding="async"
+                                 alt="Portrait of Nuwahereza Peter wearing glasses and a navy blue suit">
+                        </picture>
+                        <dl class="facts">
+                            <div><dt>Now</dt><dd>Assistant ICT Officer, UTAMU</dd></div>
+                            <div><dt>Education</dt><dd>BSc Software Engineering, UTAMU (2026)</dd></div>
+                            <div><dt>Focus</dt><dd>Machine learning, data, speech and language AI</dd></div>
+                            <div><dt>Main language</dt><dd>Python</dd></div>
+                            <div><dt>I speak</dt><dd>English, Luganda, Runyankore</dd></div>
+                        </dl>
+                    </aside>
                 </div>
-                <dl class="facts reveal">
-                    <div><dt>Based in</dt><dd>Kampala, Uganda</dd></div>
-                    <div><dt>Now</dt><dd>Assistant ICT Officer, UTAMU</dd></div>
-                    <div><dt>Education</dt><dd>BSc Software Engineering, UTAMU (2026)</dd></div>
-                    <div><dt>Focus</dt><dd>Machine learning, data, speech and language AI</dd></div>
-                    <div><dt>Main language</dt><dd>Python</dd></div>
-                    <div><dt>I speak</dt><dd>English, Luganda, Runyankore</dd></div>
-                </dl>
             </div>
         </section>
 
         <!-- Projects -->
-        <section id="projects" class="section container" aria-labelledby="projects-title">
-            <div class="section-head reveal">
-                <p class="kicker">Projects</p>
-                <h2 id="projects-title">Selected ML and AI work</h2>
-                <p class="section-intro">Every result below comes from the project's own README or evaluation files.</p>
-            </div>
+        <section id="projects" class="section" aria-labelledby="projects-title">
+            <div class="container">
+                <header class="section-head reveal">
+                    <p class="label">Projects</p>
+                    <h2 id="projects-title">Selected ML and AI work</h2>
+                    <p class="section-intro">Every result below comes from the project's own README or evaluation files.</p>
+                </header>
 
-            <div class="project-grid">
-                <!-- churnIQ -->
-                <article class="card project reveal">
-                    <div class="project-top">
-                        <p class="project-tag">Machine learning · Research</p>
-                        <h3>churnIQ: telecom customer churn prediction</h3>
-                    </div>
-                    <p>
-                        My undergraduate research project. It asks which telecom customers are likely to leave. I compared
-                        Logistic Regression, Decision Tree and Random Forest on the public IBM Telco dataset, calibrated
-                        the chosen model's probabilities, and served it through a FastAPI + React app and a Streamlit prototype.
-                    </p>
-                    <p class="result">
-                        <strong>Result:</strong> on a held-out test set of 1,409 customers, the calibrated Random Forest
-                        scored ROC-AUC 0.845 and recall 0.714. The repo has 97 Python tests.
-                    </p>
-                    <ul class="tags" aria-label="Tools used">
-                        <li>Python</li><li>pandas</li><li>scikit-learn</li><li>FastAPI</li><li>Streamlit</li><li>Docker</li>
-                    </ul>
-                    <div class="project-links">
-                        <a href="https://github.com/Nuwahereza-eng/churnIQ" target="_blank" rel="noopener">
-                            <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg> Code
-                        </a>
-                    </div>
-                </article>
+                <div class="project-grid">
+                    <!-- Featured: churnIQ -->
+                    <article class="project project--featured reveal">
+                        <div class="project-body">
+                            <p class="project-meta">Machine learning · Undergraduate research</p>
+                            <h3>churnIQ: telecom customer churn prediction</h3>
+                            <p class="project-problem">Which telecom customers are likely to leave?</p>
+                            <p class="project-desc">
+                                I compared Logistic Regression, Decision Tree and Random Forest on the public IBM Telco dataset,
+                                calibrated the chosen model's probabilities, and served it through a FastAPI + React app and a
+                                Streamlit prototype.
+                            </p>
+                            <ul class="tags" aria-label="Tools used">
+                                <li>Python</li><li>pandas</li><li>scikit-learn</li><li>FastAPI</li><li>Streamlit</li><li>Docker</li>
+                            </ul>
+                            <div class="project-links">
+                                <a href="https://github.com/Nuwahereza-eng/churnIQ" target="_blank" rel="noopener">
+                                    <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg> Code
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-result" aria-label="Key result">
+                            <p class="result-label">Result on 1,409 held-out customers</p>
+                            <div class="stats">
+                                <div><span class="stat-value">0.845</span><span class="stat-name">ROC-AUC</span></div>
+                                <div><span class="stat-value">0.714</span><span class="stat-name">Recall</span></div>
+                                <div><span class="stat-value">97</span><span class="stat-name">Python tests</span></div>
+                            </div>
+                            <p class="result-note">Calibrated Random Forest. The dataset describes a fictional telecom company created by IBM.</p>
+                        </div>
+                    </article>
 
-                <!-- Ebyafaayo -->
-                <article class="card project reveal">
-                    <div class="project-top">
-                        <p class="project-tag">Speech AI · Luganda</p>
-                        <h3>Ebyafaayo: offline Luganda oral-history keeper</h3>
-                    </div>
-                    <p>
-                        A family records an elder telling a story in Luganda. Sunbird's open Whisper model, which I
-                        converted to int8 for faster-whisper, transcribes it on a laptop CPU. After the family checks the
-                        transcript, Gemma 4 running locally in Ollama turns it into a story with an English translation,
-                        people, places and follow-up questions.
-                    </p>
-                    <p class="result">
-                        <strong>Result:</strong> the whole app runs offline on an 8 GB laptop. A grounding check links
-                        every extracted name and place to the sentence it came from and flags anything it can't find.
-                    </p>
-                    <ul class="tags" aria-label="Tools used">
-                        <li>Python</li><li>faster-whisper</li><li>CTranslate2</li><li>Gemma 4 / Ollama</li><li>FastAPI</li><li>Temporal</li>
-                    </ul>
-                    <div class="project-links">
-                        <a href="https://github.com/Nuwahereza-eng/Ebyafaayo" target="_blank" rel="noopener">
-                            <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg> Code
-                        </a>
-                    </div>
-                </article>
+                    <!-- Featured: Ebyafaayo -->
+                    <article class="project project--featured reveal">
+                        <div class="project-body">
+                            <p class="project-meta">Speech AI · Luganda</p>
+                            <h3>Ebyafaayo: offline Luganda oral-history keeper</h3>
+                            <p class="project-problem">Keep elders' stories in Luganda, in their own words, on the family's own laptop.</p>
+                            <p class="project-desc">
+                                Sunbird's open Whisper model, which I converted to int8 for faster-whisper, transcribes the
+                                recording on a laptop CPU. After the family checks the transcript, Gemma 4 running locally in
+                                Ollama turns it into a story with an English translation, people, places and follow-up questions.
+                            </p>
+                            <ul class="tags" aria-label="Tools used">
+                                <li>Python</li><li>faster-whisper</li><li>CTranslate2</li><li>Gemma 4 / Ollama</li><li>FastAPI</li><li>Temporal</li>
+                            </ul>
+                            <div class="project-links">
+                                <a href="https://github.com/Nuwahereza-eng/Ebyafaayo" target="_blank" rel="noopener">
+                                    <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg> Code
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-result" aria-label="Key result">
+                            <p class="result-label">Result</p>
+                            <div class="stats">
+                                <div><span class="stat-value">8 GB</span><span class="stat-name">laptop, fully offline</span></div>
+                                <div><span class="stat-value">6.2 → 1.6 GB</span><span class="stat-name">Whisper model after int8</span></div>
+                            </div>
+                            <p class="result-note">A grounding check links every extracted name and place to the sentence it came from and flags anything it can't find.</p>
+                        </div>
+                    </article>
 
-                <!-- Eddembe -->
-                <article class="card project reveal">
-                    <div class="project-top">
-                        <p class="project-tag">LLM · RAG · Luganda</p>
+                    <!-- Eddembe -->
+                    <article class="project reveal">
+                        <p class="project-meta">LLM · RAG · Luganda</p>
                         <h3>Eddembe: Luganda legal rights assistant</h3>
-                    </div>
-                    <p>
-                        Most Ugandans can't afford a lawyer, and most laws are in formal English. Eddembe answers rights
-                        questions in English or Luganda, explains documents such as eviction notices, and drafts letters.
-                        It retrieves sections of Ugandan law with embeddings and pgvector. Gemma 4 then answers using only
-                        those sections.
-                    </p>
-                    <p class="result">
-                        <strong>Result:</strong> covers 373 sections of six Ugandan laws. Every citation is checked
-                        against the sections that were retrieved. It works on the web, as a Flutter Android app, and by USSD with SMS replies.
-                    </p>
-                    <ul class="tags" aria-label="Tools used">
-                        <li>Gemma 4</li><li>Gemini embeddings</li><li>PostgreSQL + pgvector</li><li>Sunbird AI</li><li>TypeScript</li>
-                    </ul>
-                    <div class="project-links">
-                        <a href="https://github.com/Nuwahereza-eng/eddembe-legal-assistant" target="_blank" rel="noopener">
-                            <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg> Code
-                        </a>
-                        <a href="https://eddembe-legal-assistant-x3nd.vercel.app" target="_blank" rel="noopener">
-                            <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg> Live demo
-                        </a>
-                    </div>
-                </article>
+                        <p class="project-problem">Most Ugandans can't afford a lawyer, and most laws are in formal English.</p>
+                        <p class="result"><span class="result-tag">Result</span> 373 sections of six Ugandan laws. Every citation is checked against the retrieved sections. Web, Android and USSD.</p>
+                        <ul class="tags" aria-label="Tools used">
+                            <li>Gemma 4</li><li>Gemini embeddings</li><li>pgvector</li><li>Sunbird AI</li><li>TypeScript</li>
+                        </ul>
+                        <div class="project-links">
+                            <a href="https://github.com/Nuwahereza-eng/eddembe-legal-assistant" target="_blank" rel="noopener">
+                                <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg> Code
+                            </a>
+                            <a href="https://eddembe-legal-assistant-x3nd.vercel.app" target="_blank" rel="noopener">
+                                <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg> Live demo
+                            </a>
+                        </div>
+                    </article>
 
-                <!-- LUCID-Z -->
-                <article class="card project reveal">
-                    <div class="project-top">
-                        <p class="project-tag">Deep learning · Team project</p>
+                    <!-- LUCID-Z -->
+                    <article class="project reveal">
+                        <p class="project-meta">Deep learning · Team project</p>
                         <h3>LUCID-Z: real-time DDoS detection</h3>
-                    </div>
-                    <p>
-                        Built with a team for the IBM Z Datathon 2026, on top of LUCID, an open-source CNN for DDoS detection.
-                        It cuts network traffic into 10-second windows, scores each flow with the CNN and streams alerts to a
-                        live dashboard. TensorFlow has no IBM Z (s390x) builds, so we wrote a NumPy inference engine that reads the trained Keras weights directly.
-                    </p>
-                    <p class="result">
-                        <strong>Result:</strong> 98.68% accuracy on a 453-sample CIC-DDoS2019 test split. On IBM LinuxONE
-                        it uses about 96 MB of RAM.
-                    </p>
-                    <ul class="tags" aria-label="Tools used">
-                        <li>Python</li><li>TensorFlow / Keras</li><li>NumPy</li><li>FastAPI</li><li>WebSockets</li><li>IBM LinuxONE</li>
-                    </ul>
-                    <div class="project-links">
-                        <a href="https://github.com/Nuwahereza-eng/LUCID-Z---AI-Assisted-Network-Threat-Monitoring" target="_blank" rel="noopener">
-                            <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg> Code
-                        </a>
-                    </div>
-                </article>
+                        <p class="project-problem">Flag DDoS attacks within a 10-second window of network traffic. Built with a team for the IBM Z Datathon 2026.</p>
+                        <p class="result"><span class="result-tag">Result</span> 98.68% accuracy on a 453-sample CIC-DDoS2019 test split. About 96 MB of RAM on IBM LinuxONE.</p>
+                        <ul class="tags" aria-label="Tools used">
+                            <li>Python</li><li>TensorFlow / Keras</li><li>NumPy</li><li>FastAPI</li><li>IBM LinuxONE</li>
+                        </ul>
+                        <div class="project-links">
+                            <a href="https://github.com/Nuwahereza-eng/LUCID-Z---AI-Assisted-Network-Threat-Monitoring" target="_blank" rel="noopener">
+                                <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg> Code
+                            </a>
+                        </div>
+                    </article>
 
-                <!-- CodeNative -->
-                <article class="card project reveal">
-                    <div class="project-top">
-                        <p class="project-tag">LLM · African languages</p>
+                    <!-- CodeNative -->
+                    <article class="project reveal">
+                        <p class="project-meta">LLM · African languages</p>
                         <h3>CodeNative: learn to code in your mother tongue</h3>
-                    </div>
-                    <p>
-                        Built for the UTAMU Hackathon (24 July 2026). Paste code and get a line-by-line explanation in
-                        Kiswahili, Luganda, Yorùbá and other languages. It also explains concepts as short stories, maps
-                        GitHub repos and makes flashcards. General LLMs are weak in Ugandan languages, so for Luganda,
-                        Acholi, Ateso, Lugbara and Runyankole the app writes in English first and translates with Sunbird AI.
-                    </p>
-                    <ul class="tags" aria-label="Tools used">
-                        <li>LLM APIs</li><li>Sunbird AI</li><li>Next.js</li><li>TypeScript</li><li>D3.js</li>
-                    </ul>
-                    <div class="project-links">
-                        <a href="https://github.com/Nuwahereza-eng/codenative-" target="_blank" rel="noopener">
-                            <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg> Code
-                        </a>
-                        <a href="https://codenative-sage.vercel.app" target="_blank" rel="noopener">
-                            <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg> Live demo
-                        </a>
-                    </div>
-                </article>
-            </div>
+                        <p class="project-problem">Line-by-line code explanations in Kiswahili, Luganda, Yorùbá and other languages. Built for the UTAMU Hackathon, July 2026.</p>
+                        <ul class="tags" aria-label="Tools used">
+                            <li>LLM APIs</li><li>Sunbird AI</li><li>Next.js</li><li>TypeScript</li>
+                        </ul>
+                        <div class="project-links">
+                            <a href="https://github.com/Nuwahereza-eng/codenative-" target="_blank" rel="noopener">
+                                <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg> Code
+                            </a>
+                            <a href="https://codenative-sage.vercel.app" target="_blank" rel="noopener">
+                                <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg> Live demo
+                            </a>
+                        </div>
+                    </article>
 
-            <div class="more-work reveal">
-                <h3>Other work on GitHub</h3>
-                <ul>
-                    <li>
-                        <a href="https://github.com/Nuwahereza-eng/Transparent-Governance-Infrastructure" target="_blank" rel="noopener">GovTrust</a>:
-                        a Python/FastAPI public procurement platform with a rule-based, explainable bid risk score and a hash-chained audit log.
-                    </li>
-                    <li>
-                        <a href="https://github.com/Nuwahereza-eng/Edembbe-Mobile-App" target="_blank" rel="noopener">Eddembe Android app</a>:
-                        the Flutter client for Eddembe, with voice questions, document scanning and nearby legal aid.
-                    </li>
-                </ul>
-                <a class="text-link" href="https://github.com/Nuwahereza-eng?tab=repositories" target="_blank" rel="noopener">All repositories on GitHub →</a>
+                    <!-- Other work -->
+                    <article class="project project--list reveal">
+                        <p class="project-meta">More on GitHub</p>
+                        <ul class="mini-list">
+                            <li>
+                                <a href="https://github.com/Nuwahereza-eng/Transparent-Governance-Infrastructure" target="_blank" rel="noopener">GovTrust</a>
+                                <span>Python/FastAPI procurement platform with a rule-based, explainable bid risk score and a hash-chained audit log.</span>
+                            </li>
+                            <li>
+                                <a href="https://github.com/Nuwahereza-eng/Edembbe-Mobile-App" target="_blank" rel="noopener">Eddembe Android app</a>
+                                <span>The Flutter client for Eddembe, with voice questions, document scanning and nearby legal aid.</span>
+                            </li>
+                        </ul>
+                        <div class="project-links">
+                            <a href="https://github.com/Nuwahereza-eng?tab=repositories" target="_blank" rel="noopener">
+                                All repositories <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+                            </a>
+                        </div>
+                    </article>
+                </div>
             </div>
         </section>
 
         <!-- Skills -->
-        <section id="skills" class="section container" aria-labelledby="skills-title">
-            <div class="section-head reveal">
-                <p class="kicker">Skills</p>
-                <h2 id="skills-title">What I work with</h2>
-                <p class="section-intro">Tools I've used in my own repositories, with the main ones first.</p>
-            </div>
-            <div class="skills-grid">
-                <div class="card skill-group skill-group--main reveal">
-                    <h3>Python and data</h3>
-                    <ul class="tags tags--strong">
-                        <li>Python</li><li>pandas</li><li>NumPy</li><li>SciPy</li><li>Jupyter</li>
-                        <li>matplotlib</li><li>seaborn</li><li>Altair</li>
-                    </ul>
+        <section id="skills" class="section" aria-labelledby="skills-title">
+            <div class="container">
+                <header class="section-head reveal">
+                    <p class="label">Skills</p>
+                    <h2 id="skills-title">What I work with</h2>
+                    <p class="section-intro">Tools I've used in my own repositories.</p>
+                </header>
+                <div class="skills-grid">
+                    <div class="skill-group reveal">
+                        <h3>ML and Deep Learning</h3>
+                        <ul class="tags">
+                            <li>scikit-learn</li><li>TensorFlow / Keras</li><li>Cross-validation</li>
+                            <li>Probability calibration</li><li>ROC-AUC, precision, recall</li><li>joblib</li>
+                        </ul>
+                    </div>
+                    <div class="skill-group reveal">
+                        <h3>Data</h3>
+                        <ul class="tags">
+                            <li>Python</li><li>pandas</li><li>NumPy</li><li>SciPy</li><li>Jupyter</li>
+                            <li>matplotlib</li><li>seaborn</li><li>Altair</li><li>SQL</li>
+                        </ul>
+                    </div>
+                    <div class="skill-group reveal">
+                        <h3>NLP and Speech</h3>
+                        <ul class="tags">
+                            <li>Whisper (faster-whisper)</li><li>CTranslate2 int8</li><li>Hugging Face Transformers</li>
+                            <li>Sunbird AI</li><li>Gemma 4</li><li>Ollama</li><li>RAG with pgvector</li><li>Pydantic structured outputs</li>
+                        </ul>
+                    </div>
+                    <div class="skill-group reveal">
+                        <h3>Tools and Deployment</h3>
+                        <ul class="tags">
+                            <li>FastAPI</li><li>Streamlit</li><li>pytest</li><li>Docker</li><li>Temporal</li><li>Git</li><li>AWS (core services)</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="card skill-group skill-group--main reveal">
-                    <h3>Machine learning</h3>
-                    <ul class="tags tags--strong">
-                        <li>scikit-learn</li><li>TensorFlow / Keras</li><li>Cross-validation</li>
-                        <li>Probability calibration</li><li>ROC-AUC, precision, recall</li><li>joblib</li>
-                    </ul>
-                </div>
-                <div class="card skill-group skill-group--main reveal">
-                    <h3>Speech and language AI</h3>
-                    <ul class="tags tags--strong">
-                        <li>Whisper (faster-whisper)</li><li>CTranslate2 int8</li><li>Hugging Face Transformers</li>
-                        <li>Sunbird AI</li><li>Gemma 4</li><li>Ollama</li><li>RAG with pgvector</li><li>Pydantic structured outputs</li>
-                    </ul>
-                </div>
-                <div class="card skill-group reveal">
-                    <h3>Serving and testing</h3>
-                    <ul class="tags">
-                        <li>FastAPI</li><li>Streamlit</li><li>pytest</li><li>Docker</li><li>Temporal</li><li>Git</li>
-                    </ul>
-                </div>
-                <div class="card skill-group reveal">
-                    <h3>Supporting: web and mobile</h3>
-                    <ul class="tags">
-                        <li>TypeScript</li><li>React</li><li>Next.js</li><li>Flutter / Dart</li>
-                        <li>SQL (PostgreSQL, MySQL, SQLite)</li><li>Firebase</li><li>AWS (core services)</li>
-                    </ul>
-                </div>
+                <p class="supporting reveal">
+                    <span class="label">Also used</span>
+                    TypeScript · React · Next.js · Flutter / Dart · PostgreSQL · MySQL · SQLite · Firebase
+                </p>
             </div>
         </section>
 
         <!-- Experience -->
-        <section id="experience" class="section container" aria-labelledby="experience-title">
-            <div class="section-head reveal">
-                <p class="kicker">Experience</p>
-                <h2 id="experience-title">Roles and leadership</h2>
-            </div>
-            <div class="exp-grid">
-                <div class="exp-main">
-                    <h3 class="sub-head reveal">Work</h3>
+        <section id="experience" class="section" aria-labelledby="experience-title">
+            <div class="container">
+                <header class="section-head reveal">
+                    <p class="label">Experience</p>
+                    <h2 id="experience-title">Roles and leadership</h2>
+                </header>
+
+                <div class="timeline-wrap">
+                    <h3 class="timeline-group reveal">Work</h3>
                     <ol class="timeline">
-                        <li class="reveal">
-                            <h4>Assistant ICT Officer</h4>
-                            <p class="org">Uganda Technology and Management University (UTAMU) · current role</p>
+                        <li class="reveal is-current">
+                            <p class="when">Now</p>
+                            <div class="what">
+                                <h4>Assistant ICT Officer</h4>
+                                <p class="org">Uganda Technology and Management University (UTAMU)</p>
+                            </div>
                         </li>
                         <li class="reveal">
-                            <h4>IT Support Technician</h4>
-                            <p class="org">Center for Transformative Parenting Uganda (CTP) · from Feb 2025</p>
-                            <p>Maintained the organisation's website, managed data backups and gave technical support to staff.</p>
+                            <p class="when">From Feb 2025</p>
+                            <div class="what">
+                                <h4>IT Support Technician</h4>
+                                <p class="org">Center for Transformative Parenting Uganda (CTP)</p>
+                                <p>Maintained the organisation's website, managed data backups and gave technical support to staff.</p>
+                            </div>
                         </li>
                         <li class="reveal">
-                            <h4>IT Technical Expert</h4>
-                            <p class="org">Uganda Civil Society Against Malaria (UCAAM) · 2025 – Feb 2026</p>
-                            <p>Supported digital infrastructure and data systems for community health outreach programmes.</p>
+                            <p class="when">2025 – Feb 2026</p>
+                            <div class="what">
+                                <h4>IT Technical Expert</h4>
+                                <p class="org">Uganda Civil Society Against Malaria (UCAAM)</p>
+                                <p>Supported digital infrastructure and data systems for community health outreach programmes.</p>
+                            </div>
                         </li>
                         <li class="reveal">
-                            <h4>Computer and Digital Skills Trainer</h4>
-                            <p class="org">UTAMU IDI Dreams Project · Jun 2025 – Oct 2025</p>
-                            <p>Designed and delivered digital skills training for adolescent girls and young women.</p>
+                            <p class="when">Jun – Oct 2025</p>
+                            <div class="what">
+                                <h4>Computer and Digital Skills Trainer</h4>
+                                <p class="org">UTAMU IDI Dreams Project</p>
+                                <p>Designed and delivered digital skills training for adolescent girls and young women.</p>
+                            </div>
                         </li>
                         <li class="reveal">
-                            <h4>Computer Applications Trainer and Assistant Lecturer</h4>
-                            <p class="org">Billbrain Institute of Technology · earlier role</p>
+                            <p class="when">Earlier</p>
+                            <div class="what">
+                                <h4>Computer Applications Trainer and Assistant Lecturer</h4>
+                                <p class="org">Billbrain Institute of Technology</p>
+                            </div>
                         </li>
                     </ol>
 
-                    <h3 class="sub-head reveal">Leadership, during my degree</h3>
+                    <h3 class="timeline-group reveal">Leadership</h3>
                     <ol class="timeline">
                         <li class="reveal">
-                            <h4>Technical Lead</h4>
-                            <p class="org">GDG UTAMU (Google Developer Groups)</p>
+                            <p class="when">During my degree</p>
+                            <div class="what">
+                                <h4>Technical Lead</h4>
+                                <p class="org">GDG UTAMU (Google Developer Groups)</p>
+                            </div>
                         </li>
                         <li class="reveal">
-                            <h4>Vice President</h4>
-                            <p class="org">UTAMU Innovation Club</p>
+                            <p class="when">During my degree</p>
+                            <div class="what">
+                                <h4>Vice President</h4>
+                                <p class="org">UTAMU Innovation Club</p>
+                            </div>
                         </li>
                     </ol>
 
-                    <h3 class="sub-head reveal">Education</h3>
+                    <h3 class="timeline-group reveal">Education</h3>
                     <ol class="timeline">
                         <li class="reveal">
-                            <h4>BSc Software Engineering</h4>
-                            <p class="org">Uganda Technology and Management University (UTAMU), Kampala · 2023 – 2026</p>
-                            <p>Core areas: software development, databases, AI, networking, mobile applications and project management.</p>
+                            <p class="when">2023 – 2026</p>
+                            <div class="what">
+                                <h4>BSc Software Engineering</h4>
+                                <p class="org">Uganda Technology and Management University (UTAMU), Kampala</p>
+                                <p>Core areas: software development, databases, AI, networking, mobile applications and project management.</p>
+                            </div>
                         </li>
                     </ol>
                 </div>
 
-                <div class="card events reveal">
-                    <h3>Hackathons and certificates</h3>
-                    <ul>
-                        <li><strong>IBM Z Datathon 2026</strong><span>LUCID-Z, team entry. We ported the detector to IBM LinuxONE.</span></li>
-                        <li><strong>DEV Hacktoberfest Open-Source AI Challenge</strong><span>Week 4, "Ghost in the Machine": Ebyafaayo.</span></li>
-                        <li><strong>UTAMU Hackathon, July 2026</strong><span>CodeNative.</span></li>
-                        <li><strong>Stellar GIVE Impact Bootcamp</strong><span>SaccoChain, a savings-group lending concept on Stellar Soroban smart contracts.</span></li>
-                        <li><strong>Project Management, Monitoring and Evaluation</strong><span>Certificate, 2025.</span></li>
+                <div class="certs">
+                    <h3 class="timeline-group reveal">Hackathons and certificates</h3>
+                    <ul class="cert-grid">
+                        <li class="cert reveal">
+                            <p class="cert-type">Datathon · 2026</p>
+                            <h4>IBM Z Datathon</h4>
+                            <p>LUCID-Z, team entry. We ported the detector to IBM LinuxONE.</p>
+                        </li>
+                        <li class="cert reveal">
+                            <p class="cert-type">AI challenge</p>
+                            <h4>DEV Hacktoberfest Open-Source AI Challenge</h4>
+                            <p>Week 4, "Ghost in the Machine": Ebyafaayo.</p>
+                        </li>
+                        <li class="cert reveal">
+                            <p class="cert-type">Hackathon · Jul 2026</p>
+                            <h4>UTAMU Hackathon</h4>
+                            <p>CodeNative.</p>
+                        </li>
+                        <li class="cert reveal">
+                            <p class="cert-type">Bootcamp</p>
+                            <h4>Stellar GIVE Impact Bootcamp</h4>
+                            <p>SaccoChain, a savings-group lending concept on Stellar Soroban smart contracts.</p>
+                        </li>
+                        <li class="cert reveal">
+                            <p class="cert-type">Certificate · 2025</p>
+                            <h4>Project Management, Monitoring and Evaluation</h4>
+                        </li>
                     </ul>
                 </div>
             </div>
         </section>
 
         <!-- Contact -->
-        <section id="contact" class="section container" aria-labelledby="contact-title">
-            <div class="section-head reveal">
-                <p class="kicker">Contact</p>
+        <section id="contact" class="section section--contact" aria-labelledby="contact-title">
+            <div class="container contact reveal">
+                <p class="label">Contact</p>
                 <h2 id="contact-title">Get in touch</h2>
                 <p class="section-intro">I'm open to ML/AI roles, internships, fellowships and research collaboration.</p>
-            </div>
-            <div class="contact-grid">
-                <ul class="contact-list reveal">
+                <a class="contact-email" href="mailto:nuwaherezapeter34@gmail.com">nuwaherezapeter34@gmail.com</a>
+                <ul class="contact-links">
                     <li>
-                        <a href="mailto:nuwaherezapeter34@gmail.com">
-                            <svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>
-                            <span><strong>Email</strong>nuwaherezapeter34@gmail.com</span>
+                        <a class="btn btn-primary" href="mailto:nuwaherezapeter34@gmail.com">
+                            <svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg> Email
                         </a>
                     </li>
                     <li>
-                        <a href="https://www.linkedin.com/in/petercodes34/" target="_blank" rel="noopener">
-                            <svg class="icon" aria-hidden="true"><use href="#i-linkedin"/></svg>
-                            <span><strong>LinkedIn</strong>linkedin.com/in/petercodes34</span>
+                        <a class="btn btn-ghost" href="https://www.linkedin.com/in/petercodes34/" target="_blank" rel="noopener">
+                            <svg class="icon" aria-hidden="true"><use href="#i-linkedin"/></svg> LinkedIn
                         </a>
                     </li>
                     <li>
-                        <a href="https://github.com/Nuwahereza-eng" target="_blank" rel="noopener">
-                            <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>
-                            <span><strong>GitHub</strong>github.com/Nuwahereza-eng</span>
+                        <a class="btn btn-ghost" href="https://github.com/Nuwahereza-eng" target="_blank" rel="noopener">
+                            <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg> GitHub
                         </a>
                     </li>
                     <li>
-                        <a href="https://wa.me/256779081600" target="_blank" rel="noopener">
-                            <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
-                            <span><strong>WhatsApp</strong>+256 779 081 600</span>
+                        <a class="btn btn-ghost" href="https://wa.me/256779081600" target="_blank" rel="noopener">
+                            <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg> WhatsApp
                         </a>
-                    </li>
-                    <li class="contact-static">
-                        <svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>
-                        <span><strong>Location</strong>Kampala, Uganda</span>
                     </li>
                 </ul>
-
-                <form class="card contact-form reveal" id="contact-form" novalidate>
-                    <div class="field">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="from_name" autocomplete="name" required>
-                    </div>
-                    <div class="field">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="from_email" autocomplete="email" required>
-                    </div>
-                    <div class="field">
-                        <label for="subject">Subject</label>
-                        <input type="text" id="subject" name="subject" required>
-                    </div>
-                    <div class="field">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary" id="submit-btn">
-                        <svg class="icon" aria-hidden="true"><use href="#i-send"/></svg>
-                        <span class="btn-label">Send message</span>
-                    </button>
-                    <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
-                </form>
+                <p class="contact-note">Kampala, Uganda · +256 779 081 600</p>
             </div>
         </section>
     </main>
 
     <footer class="site-footer">
         <div class="container footer-inner">
-            <p>© 2026 Nuwahereza Peter · Kampala, Uganda</p>
-            <div class="footer-links">
-                <a href="https://github.com/Nuwahereza-eng" target="_blank" rel="noopener" aria-label="GitHub">
-                    <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>
-                </a>
-                <a href="https://www.linkedin.com/in/petercodes34/" target="_blank" rel="noopener" aria-label="LinkedIn">
-                    <svg class="icon" aria-hidden="true"><use href="#i-linkedin"/></svg>
-                </a>
-                <a href="mailto:nuwaherezapeter34@gmail.com" aria-label="Email">
-                    <svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>
-                </a>
-            </div>
+            <p>© 2026 Nuwahereza Peter</p>
+            <p><a href="#top">Back to top ↑</a></p>
         </div>
     </footer>
 
-    <script src="config/config.js?v=2026-11-14" defer></script>
-    <script src="js/script.js?v=2026-11-14" defer></script>
+    <script src="js/script.js?v=2026-11-14c" defer></script>
 </body>
 </html>

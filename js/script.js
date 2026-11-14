@@ -1,45 +1,41 @@
-// Portfolio interactions: theme, navigation, scroll reveal, contact form.
-// No libraries. EmailJS is loaded only when someone sends a message.
+// Portfolio interactions. No libraries.
+// Theme toggle, sticky header, mobile menu, active nav link, scroll reveal,
+// and a small animated network in the hero (paused when off screen).
 
 (function () {
     'use strict';
 
     const root = document.documentElement;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-    /* ---------- Theme ---------- */
+    /* ---------- Theme (dark by default) ---------- */
     const themeBtn = document.querySelector('.theme-toggle');
-    const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const theme = () => (root.getAttribute('data-theme') === 'light' ? 'light' : 'dark');
 
-    function currentTheme() {
-        const set = root.getAttribute('data-theme');
-        if (set === 'light' || set === 'dark') return set;
-        return darkQuery.matches ? 'dark' : 'light';
-    }
-
-    function syncThemeButton() {
-        if (!themeBtn) return;
-        const next = currentTheme() === 'dark' ? 'light' : 'dark';
-        themeBtn.setAttribute('aria-label', 'Switch to ' + next + ' mode');
+    function syncThemeUI() {
+        if (themeBtn) {
+            themeBtn.setAttribute('aria-label', theme() === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+        }
+        const meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', theme() === 'dark' ? '#0b0d12' : '#fafafa');
     }
 
     if (themeBtn) {
         themeBtn.addEventListener('click', () => {
-            const next = currentTheme() === 'dark' ? 'light' : 'dark';
+            const next = theme() === 'dark' ? 'light' : 'dark';
             root.setAttribute('data-theme', next);
             try { localStorage.setItem('theme', next); } catch (e) { /* storage blocked */ }
-            syncThemeButton();
+            syncThemeUI();
+            network.recolor();
         });
-        darkQuery.addEventListener('change', syncThemeButton);
-        syncThemeButton();
     }
+    syncThemeUI();
 
-    /* ---------- Header shadow on scroll ---------- */
+    /* ---------- Header background once scrolled ---------- */
     const header = document.querySelector('.site-header');
-    const onScroll = () => {
-        if (header) header.classList.toggle('scrolled', window.scrollY > 8);
-    };
+    const onScroll = () => header && header.classList.toggle('scrolled', window.scrollY > 12);
     window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+    requestAnimationFrame(onScroll);
 
     /* ---------- Mobile menu ---------- */
     const navToggle = document.querySelector('.nav-toggle');
@@ -51,155 +47,165 @@
         navToggle.setAttribute('aria-expanded', String(open));
         navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     }
-
     if (navToggle && navLinks) {
         navToggle.addEventListener('click', () => setMenu(!navLinks.classList.contains('open')));
-        navLinks.addEventListener('click', (e) => {
-            if (e.target.closest('a')) setMenu(false);
-        });
+        navLinks.addEventListener('click', (e) => { if (e.target.closest('a')) setMenu(false); });
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') setMenu(false);
+            if (e.key === 'Escape' && navLinks.classList.contains('open')) { setMenu(false); navToggle.focus(); }
         });
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.nav')) setMenu(false);
-        });
+        document.addEventListener('click', (e) => { if (!e.target.closest('.nav')) setMenu(false); });
+        window.matchMedia('(min-width: 761px)').addEventListener('change', () => setMenu(false));
     }
 
-    /* ---------- Active nav link + scroll reveal ---------- */
+    /* ---------- Scroll reveal + active section ---------- */
     const reveals = document.querySelectorAll('.reveal');
-
-    if ('IntersectionObserver' in window) {
-        const revealObserver = new IntersectionObserver((entries, obs) => {
+    if ('IntersectionObserver' in window && !reduceMotion.matches) {
+        const io = new IntersectionObserver((entries, obs) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('in');
                     obs.unobserve(entry.target);
                 }
             });
-        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
-        reveals.forEach((el) => revealObserver.observe(el));
-
-        const links = new Map();
-        document.querySelectorAll('.nav-links a[href^="#"]').forEach((a) => {
-            links.set(a.getAttribute('href').slice(1), a);
-        });
-        const sectionObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                const link = links.get(entry.target.id);
-                if (!link) return;
-                if (entry.isIntersecting) {
-                    links.forEach((l) => l.classList.remove('active'));
-                    link.classList.add('active');
-                }
-            });
-        }, { rootMargin: '-45% 0px -50% 0px' });
-        links.forEach((_, id) => {
-            const section = document.getElementById(id);
-            if (section) sectionObserver.observe(section);
-        });
+        }, { rootMargin: '0px 0px -6% 0px', threshold: 0.06 });
+        reveals.forEach((el) => io.observe(el));
     } else {
         reveals.forEach((el) => el.classList.add('in'));
     }
 
-    /* ---------- Contact form ---------- */
-    const form = document.getElementById('contact-form');
-    if (!form) return;
+    const links = new Map();
+    document.querySelectorAll('.nav-links a[href^="#"]').forEach((a) => links.set(a.hash.slice(1), a));
+    if ('IntersectionObserver' in window) {
+        const sectionIO = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                links.forEach((l) => { l.classList.remove('active'); l.removeAttribute('aria-current'); });
+                const link = links.get(entry.target.id);
+                if (link) { link.classList.add('active'); link.setAttribute('aria-current', 'true'); }
+            });
+        }, { rootMargin: '-40% 0px -55% 0px' });
+        document.querySelectorAll('main > section[id]').forEach((s) => sectionIO.observe(s));
+    }
 
-    const submitBtn = document.getElementById('submit-btn');
-    const label = submitBtn.querySelector('.btn-label');
-    const status = document.getElementById('form-status');
-    const config = window.PORTFOLIO_CONFIG || {};
-    const toEmail = (config.contact && config.contact.email) || 'nuwaherezapeter34@gmail.com';
-    const EMAILJS_SRC = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3.11.0/dist/email.min.js';
+    /* ---------- Hero network ---------- */
+    const network = (function () {
+        const canvas = document.querySelector('.hero-net');
+        const noop = { recolor() {} };
+        if (!canvas || !canvas.getContext) return noop;
+        const ctx = canvas.getContext('2d');
+        let w = 0, h = 0, dpr = 1, nodes = [], color = '110,168,254', running = false, raf = 0, visible = true;
+        const LINK = 140;
 
-    let emailjsReady = null;
-    function loadEmailJS() {
-        if (window.emailjs) return Promise.resolve(window.emailjs);
-        if (emailjsReady) return emailjsReady;
-        emailjsReady = new Promise((resolve, reject) => {
-            const s = document.createElement('script');
-            s.src = EMAILJS_SRC;
-            s.async = true;
-            s.onload = () => (window.emailjs ? resolve(window.emailjs) : reject(new Error('EmailJS missing')));
-            s.onerror = () => reject(new Error('EmailJS failed to load'));
-            document.head.appendChild(s);
+        function readColor() {
+            const hex = getComputedStyle(root).getPropertyValue('--accent').trim().replace('#', '');
+            if (hex.length === 6) {
+                color = [0, 2, 4].map((i) => parseInt(hex.slice(i, i + 2), 16)).join(',');
+            }
+        }
+
+        function resize() {
+            const rect = canvas.getBoundingClientRect();
+            dpr = Math.min(window.devicePixelRatio || 1, 2);
+            w = rect.width; h = rect.height;
+            canvas.width = Math.round(w * dpr);
+            canvas.height = Math.round(h * dpr);
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            const count = Math.min(w < 720 ? 22 : 50, Math.max(14, Math.round((w * h) / 26000)));
+            nodes = Array.from({ length: count }, () => ({
+                x: Math.random() * w,
+                y: Math.random() * h,
+                vx: (Math.random() - 0.5) * 0.22,
+                vy: (Math.random() - 0.5) * 0.22,
+                r: Math.random() * 1.4 + 1
+            }));
+        }
+
+        // Lines are drawn in three opacity bands, one path each, to keep frames cheap.
+        const BANDS = [0.08, 0.18, 0.3];
+        function draw() {
+            ctx.clearRect(0, 0, w, h);
+            ctx.lineWidth = 1;
+            const paths = BANDS.map(() => new Path2D());
+            const max = LINK * LINK;
+            for (let i = 0; i < nodes.length; i++) {
+                const a = nodes[i];
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const b = nodes[j];
+                    const dx = a.x - b.x, dy = a.y - b.y;
+                    const d2 = dx * dx + dy * dy;
+                    if (d2 < max) {
+                        const band = d2 < max * 0.25 ? 2 : d2 < max * 0.6 ? 1 : 0;
+                        paths[band].moveTo(a.x, a.y);
+                        paths[band].lineTo(b.x, b.y);
+                    }
+                }
+            }
+            paths.forEach((p, k) => {
+                ctx.strokeStyle = 'rgba(' + color + ',' + BANDS[k] + ')';
+                ctx.stroke(p);
+            });
+            const dots = new Path2D();
+            for (const n of nodes) {
+                dots.moveTo(n.x + n.r, n.y);
+                dots.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+            }
+            ctx.fillStyle = 'rgba(' + color + ',0.7)';
+            ctx.fill(dots);
+        }
+
+        // About 30 frames per second is plenty for slow drift.
+        let last = 0;
+        function step(t) {
+            raf = requestAnimationFrame(step);
+            if (t - last < 33) return;
+            last = t;
+            for (const n of nodes) {
+                n.x += n.vx; n.y += n.vy;
+                if (n.x < 0 || n.x > w) n.vx *= -1;
+                if (n.y < 0 || n.y > h) n.vy *= -1;
+            }
+            draw();
+        }
+
+        function start() {
+            if (running || reduceMotion.matches || !visible || document.hidden) return;
+            running = true;
+            raf = requestAnimationFrame(step);
+        }
+        function stop() {
+            running = false;
+            cancelAnimationFrame(raf);
+        }
+
+        function init() {
+            readColor();
+            resize();
+            draw();
+            start();
+        }
+
+        let resizeTimer = 0;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => { resize(); draw(); }, 150);
         });
-        return emailjsReady;
-    }
-
-    function emailjsConfigured() {
-        const e = config.emailjs || {};
-        return Boolean(e.publicKey && e.serviceId && e.templateId &&
-            !String(e.publicKey).startsWith('YOUR_'));
-    }
-
-    // Start loading EmailJS when the visitor starts typing.
-    form.addEventListener('focusin', () => {
-        if (emailjsConfigured()) loadEmailJS().catch(() => {});
-    }, { once: true });
-
-    function setStatus(text, kind) {
-        status.textContent = text;
-        status.className = 'form-status' + (kind ? ' ' + kind : '');
-    }
-
-    function validate() {
-        let firstBad = null;
-        form.querySelectorAll('input, textarea').forEach((field) => {
-            const ok = field.checkValidity() && field.value.trim() !== '';
-            field.setAttribute('aria-invalid', String(!ok));
-            if (!ok && !firstBad) firstBad = field;
-        });
-        if (firstBad) firstBad.focus();
-        return !firstBad;
-    }
-
-    function mailtoFallback(data) {
-        const body = 'From: ' + data.from_name + ' (' + data.from_email + ')\n\n' + data.message;
-        window.location.href = 'mailto:' + toEmail +
-            '?subject=' + encodeURIComponent(data.subject) +
-            '&body=' + encodeURIComponent(body);
-    }
-
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        if (!validate()) {
-            setStatus('Please fill in every field with a valid email address.', 'error');
-            return;
+        document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+        reduceMotion.addEventListener('change', () => (reduceMotion.matches ? stop() : start()));
+        if ('IntersectionObserver' in window) {
+            new IntersectionObserver(([entry]) => {
+                visible = entry.isIntersecting;
+                visible ? start() : stop();
+            }).observe(canvas);
         }
 
-        const fd = new FormData(form);
-        const data = {
-            from_name: fd.get('from_name').trim(),
-            from_email: fd.get('from_email').trim(),
-            subject: fd.get('subject').trim(),
-            message: fd.get('message').trim(),
-            to_name: (config.contact && config.contact.name) || 'Nuwahereza Peter',
-            to_email: toEmail
-        };
+        // Start well after the page has loaded so it never competes with it.
+        const later = () => setTimeout(() => {
+            if ('requestIdleCallback' in window) requestIdleCallback(init, { timeout: 1000 });
+            else init();
+        }, 1500);
+        if (document.readyState === 'complete') later();
+        else window.addEventListener('load', later, { once: true });
 
-        if (!emailjsConfigured()) {
-            setStatus('Opening your email app…', 'ok');
-            mailtoFallback(data);
-            return;
-        }
-
-        submitBtn.disabled = true;
-        label.textContent = 'Sending…';
-        setStatus('', '');
-
-        try {
-            const emailjs = await loadEmailJS();
-            emailjs.init(config.emailjs.publicKey);
-            await emailjs.send(config.emailjs.serviceId, config.emailjs.templateId, data);
-            setStatus("Thanks, your message was sent. I'll reply by email.", 'ok');
-            form.reset();
-            form.querySelectorAll('[aria-invalid]').forEach((f) => f.removeAttribute('aria-invalid'));
-        } catch (err) {
-            setStatus('Sorry, the message did not send. Please email me at ' + toEmail + '.', 'error');
-        } finally {
-            submitBtn.disabled = false;
-            label.textContent = 'Send message';
-        }
-    });
+        return { recolor() { readColor(); if (!running) draw(); } };
+    })();
 })();

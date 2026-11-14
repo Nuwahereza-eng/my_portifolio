@@ -60,6 +60,7 @@
     /* ---------- Scroll reveal + active section ---------- */
     const reveals = document.querySelectorAll('.reveal');
     if ('IntersectionObserver' in window && !reduceMotion.matches) {
+        // Fade in as soon as about 12% of an element is on screen.
         const io = new IntersectionObserver((entries, obs) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
@@ -67,8 +68,14 @@
                     obs.unobserve(entry.target);
                 }
             });
-        }, { rootMargin: '0px 0px -6% 0px', threshold: 0.06 });
-        reveals.forEach((el) => io.observe(el));
+        }, { threshold: 0.12 });
+        // Elements already on screen at load are shown at once, without a fade.
+        const vh = window.innerHeight;
+        reveals.forEach((el) => {
+            if (el.getBoundingClientRect().top < vh) el.classList.add('in');
+            else io.observe(el);
+        });
+        root.classList.add('reveal-ready');
     } else {
         reveals.forEach((el) => el.classList.add('in'));
     }

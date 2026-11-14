@@ -43,7 +43,7 @@
     <!-- Self-hosted fonts, preloaded so the first layout already uses them -->
     <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="css/styles.css?v=2026-11-14c">
+    <link rel="stylesheet" href="css/styles.css?v=2026-11-14d">
 
     <script type="application/ld+json">
     {
@@ -196,6 +196,16 @@
                                 calibrated the chosen model's probabilities, and served it through a FastAPI + React app and a
                                 Streamlit prototype.
                             </p>
+                            <figure class="project-media">
+                                <a href="assets/images/projects/churniq-roc-pr-1200.webp" target="_blank" rel="noopener" aria-label="Open the ROC and precision-recall chart full size">
+                                    <picture>
+                                        <source type="image/webp" srcset="assets/images/projects/churniq-roc-pr-640.webp 640w, assets/images/projects/churniq-roc-pr-1200.webp 1200w" sizes="(min-width: 900px) 600px, 92vw">
+                                        <img src="assets/images/projects/churniq-roc-pr-1200.jpg" width="1200" height="562" loading="lazy" decoding="async"
+                                             alt="ROC and precision-recall curves on the churnIQ test set. Logistic Regression AUC 0.841, Decision Tree 0.836, Random Forest 0.844.">
+                                    </picture>
+                                </a>
+                                <figcaption>Test-set ROC and precision–recall curves for the three models compared.</figcaption>
+                            </figure>
                             <ul class="tags" aria-label="Tools used">
                                 <li>Python</li><li>pandas</li><li>scikit-learn</li><li>FastAPI</li><li>Streamlit</li><li>Docker</li>
                             </ul>
@@ -227,6 +237,16 @@
                                 recording on a laptop CPU. After the family checks the transcript, Gemma 4 running locally in
                                 Ollama turns it into a story with an English translation, people, places and follow-up questions.
                             </p>
+                            <figure class="project-media">
+                                <a href="assets/images/projects/ebyafaayo-story-1200.webp" target="_blank" rel="noopener" aria-label="Open the Ebyafaayo screenshot full size">
+                                    <picture>
+                                        <source type="image/webp" srcset="assets/images/projects/ebyafaayo-story-640.webp 640w, assets/images/projects/ebyafaayo-story-1200.webp 1200w" sizes="(min-width: 900px) 600px, 92vw">
+                                        <img src="assets/images/projects/ebyafaayo-story-1200.jpg" width="1200" height="619" loading="lazy" decoding="async"
+                                             alt="Ebyafaayo screenshot: a sample story shown side by side in Luganda and in English, written by Gemma 4 on the laptop.">
+                                    </picture>
+                                </a>
+                                <figcaption>A sample story written for testing, shown in Luganda and English.</figcaption>
+                            </figure>
                             <ul class="tags" aria-label="Tools used">
                                 <li>Python</li><li>faster-whisper</li><li>CTranslate2</li><li>Gemma 4 / Ollama</li><li>FastAPI</li><li>Temporal</li>
                             </ul>
@@ -521,6 +541,6 @@
         </div>
     </footer>
 
-    <script src="js/script.js?v=2026-11-14c" defer></script>
+    <script src="js/script.js?v=2026-11-14d" defer></script>
 </body>
 </html>

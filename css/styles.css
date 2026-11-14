@@ -298,10 +298,10 @@ a:hover { color: var(--accent-hover); }
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    min-height: min(92svh, 860px);
+    min-height: min(70svh, 640px);
     display: flex;
     align-items: center;
-    padding-block: calc(var(--header-h) + 48px) 80px;
+    padding-block: calc(var(--header-h) + 40px) 48px;
 }
 
 /* Faint grid, faded toward the edges */
@@ -392,11 +392,11 @@ a:hover { color: var(--accent-hover); }
 }
 
 /* Sections -------------------------------------------------------------- */
-.section { padding-block: 88px; }
-@media (min-width: 900px) { .section { padding-block: 120px; } }
+.section { padding-block: 60px; }
+@media (min-width: 900px) { .section { padding-block: 80px; } }
 .section + .section { border-top: 1px solid var(--border); }
 
-.section-head { margin-bottom: 48px; max-width: 640px; }
+.section-head { margin-bottom: 36px; max-width: 640px; }
 .section-head .label { color: var(--accent); }
 .section-head h2 {
     margin-top: 12px;
@@ -554,6 +554,24 @@ a:hover { color: var(--accent-hover); }
 .stat-name { font-size: var(--fs-sm); color: var(--muted); }
 .result-note { font-size: var(--fs-sm); color: var(--muted); }
 
+/* Project image (chart or screenshot) in featured cards */
+.project-media { margin: 4px 0 2px; }
+.project-media a {
+    display: block;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    border: 1px solid var(--border-strong);
+    background: #fff;
+    transition: border-color .2s ease;
+}
+.project-media a:hover { border-color: var(--muted); }
+.project-media img { width: 100%; height: auto; }
+.project-media figcaption {
+    margin-top: 8px;
+    font-size: var(--fs-xs);
+    color: var(--muted);
+}
+
 /* "More on GitHub" card */
 .project--list { background: transparent; border-style: dashed; }
 .project--list:hover { background: var(--surface); }
@@ -581,7 +599,7 @@ a:hover { color: var(--accent-hover); }
     margin-bottom: 14px;
 }
 .supporting {
-    margin-top: 44px;
+    margin-top: 32px;
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
@@ -596,7 +614,7 @@ a:hover { color: var(--accent-hover); }
     color: var(--muted);
     margin-bottom: 20px;
 }
-.timeline + .timeline-group { margin-top: 48px; }
+.timeline + .timeline-group { margin-top: 36px; }
 
 .timeline li {
     display: grid;
@@ -634,7 +652,7 @@ a:hover { color: var(--accent-hover); }
     .when { text-align: right; }
 }
 
-.certs { margin-top: 72px; }
+.certs { margin-top: 52px; }
 .cert-grid {
     display: grid;
     gap: 14px;
@@ -690,13 +708,16 @@ a:hover { color: var(--accent-hover); }
 .site-footer a { color: var(--muted); }
 .site-footer a:hover { color: var(--text); }
 
-/* Scroll reveal (only when JS runs) ------------------------------------- */
-.js .reveal {
+/* Scroll reveal ----------------------------------------------------------
+   Content is only hidden once script.js has started the observer
+   (it adds .reveal-ready), so nothing stays invisible if JS fails. */
+.reveal-ready .reveal:not(.in) {
     opacity: 0;
-    transform: translateY(12px);
-    transition: opacity .45s ease, transform .45s var(--ease);
+    transform: translateY(10px);
 }
-.js .reveal.in { opacity: 1; transform: none; }
+.reveal-ready .reveal {
+    transition: opacity .4s ease, transform .4s var(--ease);
+}
 
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -705,5 +726,5 @@ a:hover { color: var(--accent-hover); }
         animation-iteration-count: 1 !important;
         transition-duration: .01ms !important;
     }
-    .js .reveal { opacity: 1; transform: none; }
+    .reveal-ready .reveal:not(.in) { opacity: 1; transform: none; }
 }

@@ -1,528 +1,205 @@
-// Smooth scrolling for navigation
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
+// Portfolio interactions: theme, navigation, scroll reveal, contact form.
+// No libraries. EmailJS is loaded only when someone sends a message.
 
-// Scroll arrow functionality
-const scrollArrow = document.querySelector('.scroll-indicator');
-if (scrollArrow) {
-    scrollArrow.addEventListener('click', () => {
-        const aboutSection = document.querySelector('#about');
-        if (aboutSection) {
-            aboutSection.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-    
-    // Add cursor pointer style
-    scrollArrow.style.cursor = 'pointer';
-}
+(function () {
+    'use strict';
 
-// Mobile navigation toggle
-const navToggle = document.querySelector('.nav-toggle');
-const navMenu = document.querySelector('.nav-menu');
+    const root = document.documentElement;
 
-if (navToggle && navMenu) {
-    navToggle.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        navToggle.classList.toggle('active');
-    });
+    /* ---------- Theme ---------- */
+    const themeBtn = document.querySelector('.theme-toggle');
+    const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
-    // Close mobile menu when clicking on a link
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            navMenu.classList.remove('active');
-            navToggle.classList.remove('active');
+    function currentTheme() {
+        const set = root.getAttribute('data-theme');
+        if (set === 'light' || set === 'dark') return set;
+        return darkQuery.matches ? 'dark' : 'light';
+    }
+
+    function syncThemeButton() {
+        if (!themeBtn) return;
+        const next = currentTheme() === 'dark' ? 'light' : 'dark';
+        themeBtn.setAttribute('aria-label', 'Switch to ' + next + ' mode');
+    }
+
+    if (themeBtn) {
+        themeBtn.addEventListener('click', () => {
+            const next = currentTheme() === 'dark' ? 'light' : 'dark';
+            root.setAttribute('data-theme', next);
+            try { localStorage.setItem('theme', next); } catch (e) { /* storage blocked */ }
+            syncThemeButton();
         });
-    });
-}
-
-// Navbar scroll effect with deployment-safe visibility
-let lastScrollTop = 0;
-const navbar = document.querySelector('.navbar');
-
-// Force navbar visibility on page load
-if (navbar) {
-    navbar.style.setProperty('transform', 'translateY(0)', 'important');
-    navbar.style.setProperty('display', 'block', 'important');
-    navbar.style.setProperty('visibility', 'visible', 'important');
-    navbar.style.setProperty('opacity', '1', 'important');
-    navbar.style.setProperty('position', 'fixed', 'important');
-    navbar.style.setProperty('top', '0', 'important');
-    navbar.style.setProperty('z-index', '1000', 'important');
-}
-
-window.addEventListener('scroll', () => {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    
-    // Multiple safety checks for deployed websites
-    if (navbar) {
-        // Force navbar to stay visible with highest priority
-        navbar.style.setProperty('transform', 'translateY(0)', 'important');
-        navbar.style.setProperty('display', 'block', 'important');
-        navbar.style.setProperty('visibility', 'visible', 'important');
-        navbar.style.setProperty('opacity', '1', 'important');
-        navbar.style.setProperty('position', 'fixed', 'important');
-        navbar.style.setProperty('top', '0', 'important');
-        
-        // Remove any potentially conflicting classes or attributes
-        navbar.classList.remove('hidden', 'invisible', 'opacity-0');
-        
-        // Add smooth color transitions based on scroll position
-        if (scrollTop > 100) {
-            navbar.classList.add('scrolled');
-            navbar.classList.remove('transparent');
-        } else if (scrollTop > 20) {
-            navbar.classList.remove('scrolled');
-            navbar.classList.remove('transparent');
-        } else {
-            navbar.classList.remove('scrolled');
-            navbar.classList.add('transparent');
-        }
+        darkQuery.addEventListener('change', syncThemeButton);
+        syncThemeButton();
     }
-    
-    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-});
 
-// Additional safety check on DOM ready
-document.addEventListener('DOMContentLoaded', function() {
-    const navbar = document.querySelector('.navbar');
-    if (navbar) {
-        navbar.style.setProperty('transform', 'translateY(0)', 'important');
-        navbar.style.setProperty('display', 'block', 'important');
-        navbar.style.setProperty('visibility', 'visible', 'important');
-        navbar.style.setProperty('opacity', '1', 'important');
+    /* ---------- Header shadow on scroll ---------- */
+    const header = document.querySelector('.site-header');
+    const onScroll = () => {
+        if (header) header.classList.toggle('scrolled', window.scrollY > 8);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    /* ---------- Mobile menu ---------- */
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+
+    function setMenu(open) {
+        if (!navToggle || !navLinks) return;
+        navLinks.classList.toggle('open', open);
+        navToggle.setAttribute('aria-expanded', String(open));
+        navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     }
-});
 
-// Safety check every 5 seconds for deployed sites
-setInterval(() => {
-    const navbar = document.querySelector('.navbar');
-    if (navbar && window.getComputedStyle(navbar).transform !== 'none') {
-        navbar.style.setProperty('transform', 'translateY(0)', 'important');
+    if (navToggle && navLinks) {
+        navToggle.addEventListener('click', () => setMenu(!navLinks.classList.contains('open')));
+        navLinks.addEventListener('click', (e) => {
+            if (e.target.closest('a')) setMenu(false);
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') setMenu(false);
+        });
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav')) setMenu(false);
+        });
     }
-}, 5000);
 
-// Typing animation for hero section
-const typingTexts = [
-    'Mobile App Developer',
-    'Frontend Enthusiast', 
-    'Software Engineering Student',
-    'Flutter Developer',
-    'UI/UX Designer'
-];
+    /* ---------- Active nav link + scroll reveal ---------- */
+    const reveals = document.querySelectorAll('.reveal');
 
-let textIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
-const typingElement = document.querySelector('.typing-text');
-const typingSpeed = 100;
-const deletingSpeed = 50;
-const pauseDuration = 2000;
+    if ('IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver((entries, obs) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+        reveals.forEach((el) => revealObserver.observe(el));
 
-function typeText() {
-    if (!typingElement) return;
-    
-    const currentText = typingTexts[textIndex];
-    
-    if (isDeleting) {
-        typingElement.textContent = currentText.substring(0, charIndex - 1);
-        charIndex--;
+        const links = new Map();
+        document.querySelectorAll('.nav-links a[href^="#"]').forEach((a) => {
+            links.set(a.getAttribute('href').slice(1), a);
+        });
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                const link = links.get(entry.target.id);
+                if (!link) return;
+                if (entry.isIntersecting) {
+                    links.forEach((l) => l.classList.remove('active'));
+                    link.classList.add('active');
+                }
+            });
+        }, { rootMargin: '-45% 0px -50% 0px' });
+        links.forEach((_, id) => {
+            const section = document.getElementById(id);
+            if (section) sectionObserver.observe(section);
+        });
     } else {
-        typingElement.textContent = currentText.substring(0, charIndex + 1);
-        charIndex++;
+        reveals.forEach((el) => el.classList.add('in'));
     }
-    
-    let typeSpeed = isDeleting ? deletingSpeed : typingSpeed;
-    
-    if (!isDeleting && charIndex === currentText.length) {
-        typeSpeed = pauseDuration;
-        isDeleting = true;
-    } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        textIndex = (textIndex + 1) % typingTexts.length;
+
+    /* ---------- Contact form ---------- */
+    const form = document.getElementById('contact-form');
+    if (!form) return;
+
+    const submitBtn = document.getElementById('submit-btn');
+    const label = submitBtn.querySelector('.btn-label');
+    const status = document.getElementById('form-status');
+    const config = window.PORTFOLIO_CONFIG || {};
+    const toEmail = (config.contact && config.contact.email) || 'nuwaherezapeter34@gmail.com';
+    const EMAILJS_SRC = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3.11.0/dist/email.min.js';
+
+    let emailjsReady = null;
+    function loadEmailJS() {
+        if (window.emailjs) return Promise.resolve(window.emailjs);
+        if (emailjsReady) return emailjsReady;
+        emailjsReady = new Promise((resolve, reject) => {
+            const s = document.createElement('script');
+            s.src = EMAILJS_SRC;
+            s.async = true;
+            s.onload = () => (window.emailjs ? resolve(window.emailjs) : reject(new Error('EmailJS missing')));
+            s.onerror = () => reject(new Error('EmailJS failed to load'));
+            document.head.appendChild(s);
+        });
+        return emailjsReady;
     }
-    
-    setTimeout(typeText, typeSpeed);
-}
 
-// Start typing animation when page loads
-document.addEventListener('DOMContentLoaded', function() {
-    // Small delay to ensure everything is loaded
-    setTimeout(typeText, 500);
-});
-
-// Initialize scroll animations after page is fully loaded
-window.addEventListener('load', function() {
-    // Show the page with fade-in effect
-    document.body.classList.add('loaded');
-    
-    // Additional delay for smooth appearance
-    setTimeout(initScrollAnimations, 1000);
-});
-
-function initScrollAnimations() {
-    // Observe all sections for scroll animations
-    document.querySelectorAll('section, .timeline-item, .project-card, .skills-category, .about-stats').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
-}
-
-// Scroll animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-            
-            // Animate skill bars
-            if (entry.target.classList.contains('skills-category')) {
-                animateSkillBars(entry.target);
-            }
-            
-            // Animate stats
-            if (entry.target.classList.contains('about-stats')) {
-                animateStats();
-            }
-        }
-    });
-}, observerOptions);
-
-// Animate skill bars
-function animateSkillBars(skillsSection) {
-    const skillBars = skillsSection.querySelectorAll('.skill-progress');
-    skillBars.forEach(bar => {
-        const width = bar.getAttribute('data-width');
-        setTimeout(() => {
-            bar.style.width = width;
-        }, 200);
-    });
-}
-
-// Animate statistics
-function animateStats() {
-    const statNumbers = document.querySelectorAll('.stat-number');
-    statNumbers.forEach(stat => {
-        const target = parseInt(stat.textContent);
-        let current = 0;
-        const increment = target / 100;
-        const timer = setInterval(() => {
-            current += increment;
-            if (current >= target) {
-                current = target;
-                clearInterval(timer);
-            }
-            stat.textContent = Math.floor(current) + '+';
-        }, 20);
-    });
-}
-
-// Active navigation link highlighting
-function updateActiveNavLink() {
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-link');
-    
-    let current = '';
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (scrollY >= (sectionTop - 200)) {
-            current = section.getAttribute('id');
-        }
-    });
-    
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-            link.classList.add('active');
-        }
-    });
-}
-
-window.addEventListener('scroll', updateActiveNavLink);
-
-// Particle animation for hero background
-function createParticles() {
-    const particlesContainer = document.querySelector('.hero-particles');
-    if (!particlesContainer) return;
-    
-    for (let i = 0; i < 50; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        particle.style.cssText = `
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: rgba(102, 126, 234, 0.3);
-            border-radius: 50%;
-            left: ${Math.random() * 100}%;
-            top: ${Math.random() * 100}%;
-            animation: float ${5 + Math.random() * 10}s ease-in-out infinite;
-            animation-delay: ${Math.random() * 5}s;
-        `;
-        particlesContainer.appendChild(particle);
+    function emailjsConfigured() {
+        const e = config.emailjs || {};
+        return Boolean(e.publicKey && e.serviceId && e.templateId &&
+            !String(e.publicKey).startsWith('YOUR_'));
     }
-}
 
-// Initialize EmailJS using config
-(function() {
-    // Wait for config to be loaded
-    document.addEventListener('DOMContentLoaded', function() {
-        if (window.PORTFOLIO_CONFIG && window.PORTFOLIO_CONFIG.emailjs.publicKey !== 'YOUR_EMAILJS_PUBLIC_KEY') {
-            emailjs.init(window.PORTFOLIO_CONFIG.emailjs.publicKey);
-            console.log('EmailJS initialized with config');
-        } else {
-            console.warn('EmailJS not configured. Please update config/config.js with your EmailJS credentials.');
+    // Start loading EmailJS when the visitor starts typing.
+    form.addEventListener('focusin', () => {
+        if (emailjsConfigured()) loadEmailJS().catch(() => {});
+    }, { once: true });
+
+    function setStatus(text, kind) {
+        status.textContent = text;
+        status.className = 'form-status' + (kind ? ' ' + kind : '');
+    }
+
+    function validate() {
+        let firstBad = null;
+        form.querySelectorAll('input, textarea').forEach((field) => {
+            const ok = field.checkValidity() && field.value.trim() !== '';
+            field.setAttribute('aria-invalid', String(!ok));
+            if (!ok && !firstBad) firstBad = field;
+        });
+        if (firstBad) firstBad.focus();
+        return !firstBad;
+    }
+
+    function mailtoFallback(data) {
+        const body = 'From: ' + data.from_name + ' (' + data.from_email + ')\n\n' + data.message;
+        window.location.href = 'mailto:' + toEmail +
+            '?subject=' + encodeURIComponent(data.subject) +
+            '&body=' + encodeURIComponent(body);
+    }
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!validate()) {
+            setStatus('Please fill in every field with a valid email address.', 'error');
+            return;
+        }
+
+        const fd = new FormData(form);
+        const data = {
+            from_name: fd.get('from_name').trim(),
+            from_email: fd.get('from_email').trim(),
+            subject: fd.get('subject').trim(),
+            message: fd.get('message').trim(),
+            to_name: (config.contact && config.contact.name) || 'Nuwahereza Peter',
+            to_email: toEmail
+        };
+
+        if (!emailjsConfigured()) {
+            setStatus('Opening your email app…', 'ok');
+            mailtoFallback(data);
+            return;
+        }
+
+        submitBtn.disabled = true;
+        label.textContent = 'Sending…';
+        setStatus('', '');
+
+        try {
+            const emailjs = await loadEmailJS();
+            emailjs.init(config.emailjs.publicKey);
+            await emailjs.send(config.emailjs.serviceId, config.emailjs.templateId, data);
+            setStatus("Thanks, your message was sent. I'll reply by email.", 'ok');
+            form.reset();
+            form.querySelectorAll('[aria-invalid]').forEach((f) => f.removeAttribute('aria-invalid'));
+        } catch (err) {
+            setStatus('Sorry, the message did not send. Please email me at ' + toEmail + '.', 'error');
+        } finally {
+            submitBtn.disabled = false;
+            label.textContent = 'Send message';
         }
     });
 })();
-
-// Contact form handling with EmailJS
-document.addEventListener('DOMContentLoaded', function() {
-    const contactForm = document.getElementById('contact-form');
-    const submitBtn = document.getElementById('submit-btn');
-    const btnText = document.querySelector('.btn-text');
-    
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Change button state to loading
-            submitBtn.disabled = true;
-            btnText.textContent = 'Sending...';
-            submitBtn.querySelector('i').className = 'fas fa-spinner fa-spin';
-            
-            // Get configuration
-            const config = window.PORTFOLIO_CONFIG;
-            if (!config || !config.emailjs.serviceId || config.emailjs.serviceId === 'YOUR_EMAILJS_SERVICE_ID') {
-                showNotification('Email service not configured. Please contact me directly at ' + (config?.contact?.email || 'nuwaherezapeter34@gmail.com'), 'error');
-                return;
-            }
-            
-            // Get form data
-            const formData = new FormData(this);
-            const templateParams = {
-                from_name: formData.get('from_name'),      // Visitor's name
-                from_email: formData.get('from_email'),    // Visitor's email address
-                subject: formData.get('subject'),          // Message subject
-                message: formData.get('message'),          // The actual message content
-                to_name: config.contact.name,             // Your name (recipient)
-                to_email: config.contact.email            // Your email (where you'll receive the message)
-            };
-            
-            // Send email TO your inbox using EmailJS
-            // This sends the visitor's contact form data directly to your email
-            emailjs.send(config.emailjs.serviceId, config.emailjs.templateId, templateParams)
-                .then(function(response) {
-                    console.log('Email sent to your inbox successfully!', response.status, response.text);
-                    showNotification('Thank you! Your message has been sent. I\'ll get back to you soon!', 'success');
-                    contactForm.reset();
-                }, function(error) {
-                    console.log('Failed to send email:', error);
-                    showNotification('Sorry, there was an error sending your message. Please try again or contact me directly at ' + config.contact.email, 'error');
-                })
-                .finally(function() {
-                    // Reset button state
-                    submitBtn.disabled = false;
-                    btnText.textContent = 'Send Message';
-                    submitBtn.querySelector('i').className = 'fas fa-paper-plane';
-                });
-        });
-    }
-});
-
-// Contact form handling (fallback for non-EmailJS setup)
-const contactFormFallback = document.querySelector('.form:not(#contact-form)');
-if (contactFormFallback) {
-    contactFormFallback.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Get form data
-        const formData = new FormData(this);
-        const name = formData.get('from_name') || formData.get('name');
-        const email = formData.get('from_email') || formData.get('email');
-        const subject = formData.get('subject');
-        const message = formData.get('message');
-        
-        // Simple validation
-        if (!name || !email || !subject || !message) {
-            showNotification('Please fill in all fields', 'error');
-            return;
-        }
-        
-        // Create mailto link as fallback
-        const mailtoLink = `mailto:nuwaherezapeter34@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`From: ${name} (${email})\n\n${message}`)}`;
-        window.location.href = mailtoLink;
-        
-        showNotification('Opening your email client...', 'success');
-        this.reset();
-    });
-}
-
-// Notification system
-function showNotification(message, type = 'info') {
-    const notification = document.createElement('div');
-    notification.className = `notification ${type}`;
-    notification.style.cssText = `
-        position: fixed;
-        top: 100px;
-        right: 20px;
-        background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6'};
-        color: white;
-        padding: 1rem 1.5rem;
-        border-radius: 8px;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        z-index: 1000;
-        transform: translateX(100%);
-        transition: transform 0.3s ease;
-    `;
-    notification.textContent = message;
-    
-    document.body.appendChild(notification);
-    
-    // Animate in
-    setTimeout(() => {
-        notification.style.transform = 'translateX(0)';
-    }, 100);
-    
-    // Remove after 3 seconds
-    setTimeout(() => {
-        notification.style.transform = 'translateX(100%)';
-        setTimeout(() => {
-            document.body.removeChild(notification);
-        }, 300);
-    }, 3000);
-}
-
-// Initialize particles when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    createParticles();
-    
-    // Add loading animation
-    document.body.style.opacity = '0';
-    setTimeout(() => {
-        document.body.style.transition = 'opacity 0.5s ease';
-        document.body.style.opacity = '1';
-    }, 100);
-});
-
-// Keyboard navigation
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        // Close mobile menu
-        navMenu?.classList.remove('active');
-        navToggle?.classList.remove('active');
-    }
-});
-
-// Performance optimization - Throttle scroll events
-function throttle(func, limit) {
-    let inThrottle;
-    return function() {
-        const args = arguments;
-        const context = this;
-        if (!inThrottle) {
-            func.apply(context, args);
-            inThrottle = true;
-            setTimeout(() => inThrottle = false, limit);
-        }
-    }
-}
-
-// Apply throttling to scroll events
-window.addEventListener('scroll', throttle(updateActiveNavLink, 100));
-
-// Preload images
-function preloadImages() {
-    const imageUrls = ['peterImage.jpg'];
-    imageUrls.forEach(url => {
-        const img = new Image();
-        img.src = url;
-    });
-}
-
-// More Projects Toggle Functionality
-document.addEventListener('DOMContentLoaded', function() {
-    const viewMoreBtn = document.getElementById('view-more-projects');
-    const hideProjectsBtn = document.getElementById('hide-projects');
-    const moreProjectsContainer = document.getElementById('more-projects');
-    
-    if (viewMoreBtn && moreProjectsContainer) {
-        viewMoreBtn.addEventListener('click', function() {
-            // Show the additional projects
-            moreProjectsContainer.style.display = 'block';
-            
-            // Smooth animation
-            setTimeout(() => {
-                moreProjectsContainer.classList.add('show');
-            }, 50);
-            
-            // Update button text
-            const btnText = this.querySelector('.btn-text');
-            const btnIcon = this.querySelector('i');
-            btnText.textContent = 'Loading Projects...';
-            btnIcon.className = 'fas fa-spinner fa-spin';
-            
-            // Simulate loading and scroll to new content
-            setTimeout(() => {
-                btnText.textContent = 'View More Projects';
-                btnIcon.className = 'fas fa-check';
-                
-                // Scroll to the new projects section
-                moreProjectsContainer.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-                
-                // Hide the view more button
-                this.style.display = 'none';
-            }, 1000);
-        });
-    }
-    
-    if (hideProjectsBtn && moreProjectsContainer) {
-        hideProjectsBtn.addEventListener('click', function() {
-            // Hide the additional projects with animation
-            moreProjectsContainer.classList.remove('show');
-            
-            setTimeout(() => {
-                moreProjectsContainer.style.display = 'none';
-                
-                // Show the view more button again
-                viewMoreBtn.style.display = 'inline-flex';
-                const btnText = viewMoreBtn.querySelector('.btn-text');
-                const btnIcon = viewMoreBtn.querySelector('i');
-                btnText.textContent = 'View More Projects';
-                btnIcon.className = 'fas fa-plus';
-                
-                // Scroll back to the main projects section
-                document.getElementById('projects').scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center'
-                });
-            }, 300);
-        });
-    }
-});
-
-// Initialize preloading
-preloadImages();
